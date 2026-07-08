@@ -1,0 +1,101 @@
+# -------------------------------------------------------------------------
+# Flutter / Dart chính quy
+# -------------------------------------------------------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+coverage/
+**/ios/Flutter/.last_build_id
+
+# Symbolication / obfuscation artifacts
+app.*.symbols
+app.*.map.json
+
+# Loại bỏ các file sinh ra bởi build_runner hoặc các gói generator (nếu cần ẩn file generated)
+# *.freezed.dart
+# *.g.dart
+
+# -------------------------------------------------------------------------
+# Android Studio / IntelliJ
+# -------------------------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.modules.xml
+*.class
+
+# -------------------------------------------------------------------------
+# Visual Studio Code
+# -------------------------------------------------------------------------
+.vscode/
+
+# -------------------------------------------------------------------------
+# Tooling local
+# -------------------------------------------------------------------------
+.qodo/
+
+# -------------------------------------------------------------------------
+# Android (Phần native)
+# -------------------------------------------------------------------------
+android/local.properties
+android/.gradle/
+android/.kotlin/
+android/app/local.properties
+android/app/generated/
+android/app/build/
+android/app/debug
+android/app/profile
+android/app/release
+android/captures/
+*.apk
+*.apks
+*.aab
+
+# -------------------------------------------------------------------------
+# iOS / macOS (Phần native & CocoaPods)
+# -------------------------------------------------------------------------
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/DerivedData/
+ios/.symlinks/
+ios/Pods/
+ios/.generated/
+.xcworkspace/
+*.workspace
+MaxSDKCrashReporter/
+
+# Tương tự cho macOS native
+macos/Flutter/Generated.xcconfig
+macos/Flutter/flutter_export_environment.sh
+macos/Pods/
+
+# -------------------------------------------------------------------------
+# Windows, Linux, Web native builds
+# -------------------------------------------------------------------------
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+web/build/
+
+# -------------------------------------------------------------------------
+# File hệ điều hành & Log
+# -------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.log
+
+# -------------------------------------------------------------------------
+# Bảo mật: Quản lý môi trường và Key (QUAN TRỌNG)
+# -------------------------------------------------------------------------
+.env
+.env.*
+*.keystore
+*.jks
+*.p12
