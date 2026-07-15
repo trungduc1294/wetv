@@ -4,6 +4,7 @@ import 'package:wetv/app/widgets/atoms/AppLogo.dart';
 import 'package:wetv/app/widgets/atoms/TypographyButton.dart';
 import 'package:wetv/app/widgets/molecules/SearchBox.dart';
 
+// [VN] Header ở màn hình Home
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
