@@ -11,13 +11,15 @@ class HorizonNavBar extends StatelessWidget {
     final horizonNavBarController = Get.put(Horizonnavbarcontroller());
     return SizedBox(
       height: 45,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: horizonNavBarController.navItems.length,
-        itemBuilder: (context, index) {
-          return Obx(() {
-            final bool isSelected =
-                horizonNavBarController.selectedIndex.value == index;
+      child: Obx(() {
+        // [VN] Đọc selectedIndex ngoài itemBuilder để Obx theo dõi được
+        final int selectedIndex = horizonNavBarController.selectedIndex.value;
+
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: horizonNavBarController.categories.length,
+          itemBuilder: (context, index) {
+            final bool isSelected = selectedIndex == index;
 
             return GestureDetector(
               onTap: () => horizonNavBarController.changeTab(index),
@@ -28,7 +30,7 @@ class HorizonNavBar extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    horizonNavBarController.navItems[index],
+                    horizonNavBarController.categories[index].name,
                     style: TextStyle(
                       color: isSelected
                           ? AppColors.white_primary
@@ -42,9 +44,9 @@ class HorizonNavBar extends StatelessWidget {
                 ),
               ),
             );
-          });
-        },
-      ),
+          },
+        );
+      }),
     );
   }
 }

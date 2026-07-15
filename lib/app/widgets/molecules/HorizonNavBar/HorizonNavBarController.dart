@@ -1,13 +1,33 @@
 import 'package:get/get.dart';
+import 'package:wetv/app/apis/apis.dart';
+import 'package:wetv/app/data/models/CategoryModel.dart';
 
 class Horizonnavbarcontroller extends GetxController {
+  final CategoriesApi _categoriesApi = CategoriesApi();
+
   // [VN] Biến observable lưu trữ index của tab đang chọn
   var selectedIndex = 0.obs;
 
-  // [VN] Danh sách các item trên Nav
-  final List<String> navItems = ['Nổi bật', 'Phim truyện', 'Anime', 'Cổ trang'];
+  // [VN] Danh sách category từ API
+  final categories = <CategoryModel>[].obs;
 
-  // [VN] Hàm thay đôi tab
+  @override
+  void onInit() {
+    super.onInit();
+    getCategories();
+  }
+
+  // [VN] Lấy danh sách category từ API
+  Future<void> getCategories() async {
+    try {
+      final result = await _categoriesApi.getCategories();
+      categories.assignAll(result);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // [VN] Hàm thay đổi tab
   void changeTab(int index) {
     selectedIndex.value = index;
   }
