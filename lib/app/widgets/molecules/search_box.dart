@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wetv/app/core/theme/AppColors.dart';
-import 'package:wetv/app/widgets/atoms/CustomVerticalDivider.dart';
+import 'package:wetv/app/core/theme/app_color.dart';
+import 'package:wetv/app/widgets/atoms/custom_vertical_divider.dart';
 
 class SearchBox extends StatelessWidget {
   const SearchBox({

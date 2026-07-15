@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wetv/app/widgets/atoms/Typography.dart';
+import 'package:wetv/app/widgets/atoms/typography.dart';
 
 class TypographyButton extends StatelessWidget {
   final String text;

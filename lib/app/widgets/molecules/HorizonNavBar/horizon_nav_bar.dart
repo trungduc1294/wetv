@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wetv/app/core/theme/AppColors.dart';
-import 'package:wetv/app/widgets/molecules/HorizonNavBar/HorizonNavBarController.dart';
+import 'package:wetv/app/core/theme/app_color.dart';
+import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
 
 class HorizonNavBar extends StatelessWidget {
   const HorizonNavBar({super.key});

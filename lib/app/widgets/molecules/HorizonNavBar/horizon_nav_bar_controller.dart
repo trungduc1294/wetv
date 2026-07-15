@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:wetv/app/apis/apis.dart';
-import 'package:wetv/app/data/models/CategoryModel.dart';
+import 'package:wetv/app/data/models/category_model.dart';
 
 class Horizonnavbarcontroller extends GetxController {
   final CategoriesApi _categoriesApi = CategoriesApi();

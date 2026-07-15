@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:wetv/app/routes/AppPages.dart';
+import 'package:wetv/app/routes/app_page.dart';
 
 void main() {
   runApp(const MyApp());

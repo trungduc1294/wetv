@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wetv/app/core/theme/AppColors.dart';
-import 'package:wetv/app/modules/home/HomeController.dart';
-import 'package:wetv/app/widgets/organisms/HomeHeader.dart';
-import 'package:wetv/app/widgets/molecules/HorizonNavBar/HorizonNavBar.dart';
-import 'package:wetv/app/widgets/molecules/HorizonNavBar/HorizonNavBarController.dart';
+import 'package:wetv/app/core/theme/app_color.dart';
+import 'package:wetv/app/modules/home/home_controller.dart';
+import 'package:wetv/app/widgets/organisms/home_header.dart';
+import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar.dart';
+import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
 
-class HomeScreen extends GetView<Homecontroller> {
-  HomeScreen({super.key});
+class HomeView extends GetView<Homecontroller> {
+  HomeView({super.key});
   final horizonNavBarController = Get.put(Horizonnavbarcontroller());
 
   @override

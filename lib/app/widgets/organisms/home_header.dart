@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wetv/app/core/theme/AppColors.dart';
-import 'package:wetv/app/widgets/atoms/AppLogo.dart';
-import 'package:wetv/app/widgets/atoms/TypographyButton.dart';
-import 'package:wetv/app/widgets/molecules/SearchBox.dart';
+import 'package:wetv/app/core/theme/app_color.dart';
+import 'package:wetv/app/widgets/atoms/app_logo.dart';
+import 'package:wetv/app/widgets/atoms/typography_button.dart';
+import 'package:wetv/app/widgets/molecules/search_box.dart';
 
 // [VN] Header ở màn hình Home
 class HomeHeader extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:wetv/app/data/models/CategoryModel.dart';
+import 'package:wetv/app/data/models/category_model.dart';
 
 class CategoriesApi {
   Future<List<CategoryModel>> getCategories() async {

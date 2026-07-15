@@ -42,37 +42,37 @@ class IconButton extends StatelessWidget {
 
     return switch (labelPosition) {
       LabelPosition.left => Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            labelWidget,
-            const SizedBox(width: _gap),
-            _icon,
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          labelWidget,
+          const SizedBox(width: _gap),
+          _icon,
+        ],
+      ),
       LabelPosition.right => Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _icon,
-            const SizedBox(width: _gap),
-            labelWidget,
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _icon,
+          const SizedBox(width: _gap),
+          labelWidget,
+        ],
+      ),
       LabelPosition.top => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            labelWidget,
-            const SizedBox(height: _gap),
-            _icon,
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          labelWidget,
+          const SizedBox(height: _gap),
+          _icon,
+        ],
+      ),
       LabelPosition.bottom => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _icon,
-            const SizedBox(height: _gap),
-            labelWidget,
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _icon,
+          const SizedBox(height: _gap),
+          labelWidget,
+        ],
+      ),
     };
   }
 

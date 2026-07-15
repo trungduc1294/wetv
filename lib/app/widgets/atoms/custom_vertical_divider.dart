@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wetv/app/core/theme/AppColors.dart';
+import 'package:wetv/app/core/theme/app_color.dart';
 
 class CustomVerticalDivider extends StatelessWidget {
   const CustomVerticalDivider({
