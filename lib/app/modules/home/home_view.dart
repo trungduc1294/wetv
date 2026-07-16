@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/modules/home/home_controller.dart';
+import 'package:wetv/app/modules/movie_list/movie_list_view.dart';
 import 'package:wetv/app/widgets/organisms/home_header.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
@@ -28,9 +29,7 @@ class HomeView extends GetView<Homecontroller> {
                   // Tự động nhảy vào case tương ứng khi selectedIndex.value thay đổi
                   switch (horizonNavBarController.selectedIndex.value) {
                     case 0:
-                      return const Center(
-                        child: Text('Nội dung trang: NỔI BẬT'),
-                      );
+                      return MovieListView();
                     case 1:
                       return const Center(
                         child: Text('Nội dung trang: PHIM TRUYỆN'),
