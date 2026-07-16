@@ -4,6 +4,7 @@ import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/molecules/movie_vertical_card.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
+import 'package:wetv/app/widgets/organisms/movie_vertical_card_list.dart';
 import 'package:wetv/app/widgets/organisms/movie_horizontal_card_list.dart';
 
 class MovieListView extends GetView<MovieListController> {
@@ -11,36 +12,75 @@ class MovieListView extends GetView<MovieListController> {
 
   @override
   Widget build(BuildContext context) {
-    return MovieHorizontalCardList(
-      movies: [
-        MovieModel(
-          id: '1',
-          posterUrl:
-              'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title',
+    return Column(
+      children: [
+        MovieVerticalCardList(
+          movies: [
+            MovieModel(
+              id: '1',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+          ],
+          onMovieTap: (movie) {
+            print(movie.movieName);
+          },
         ),
-        MovieModel(
-          id: '2',
-          posterUrl:
-              'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title',
-        ),
-        MovieModel(
-          id: '2',
-          posterUrl:
-              'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title',
-        ),
-        MovieModel(
-          id: '2',
-          posterUrl:
-              'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title',
+
+        SizedBox(height: 20),
+
+        MovieHorizontalCardList(
+          movies: [
+            MovieModel(
+              id: '1',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+              shortDescription: 'Short Description',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+            MovieModel(
+              id: '2',
+              posterUrl:
+                  'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
+              movieName: 'Movie Title',
+            ),
+          ],
+          onMovieTap: (movie) {
+            print(movie.movieName);
+          },
         ),
       ],
-      onMovieTap: (movie) {
-        print(movie.movieName);
-      },
     );
   }
 }

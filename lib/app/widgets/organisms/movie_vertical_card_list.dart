@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wetv/app/widgets/molecules/movie_horizontal_card.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
+import 'package:wetv/app/widgets/molecules/movie_vertical_card.dart';
 
-class MovieHorizontalCardList extends StatelessWidget {
-  const MovieHorizontalCardList({
+class MovieVerticalCardList extends StatelessWidget {
+  const MovieVerticalCardList({
     super.key,
     required this.movies,
     required this.onMovieTap,
     this.spacing = 10,
     this.padding = const EdgeInsets.symmetric(horizontal: 8),
-    this.cardWidth = 164,
-    this.cardHeight = 106,
-    this.height = 200,
+    this.cardWidth = 104,
+    this.cardHeight = 164,
+    this.height = 220,
   });
 
   final List<MovieModel> movies;
@@ -33,7 +33,7 @@ class MovieHorizontalCardList extends StatelessWidget {
         separatorBuilder: (_, __) => SizedBox(width: spacing),
         itemBuilder: (context, index) {
           final movie = movies[index];
-          return MovieHorizontalCard(
+          return MovieVerticalCard(
             movie: movie,
             width: cardWidth,
             height: cardHeight,
