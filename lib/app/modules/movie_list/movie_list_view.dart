@@ -17,25 +17,25 @@ class MovieListView extends GetView<MovieListController> {
           id: '1',
           posterUrl:
               'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title 1234567890 asd asd asdas asd asd as d',
+          movieName: 'Movie Title',
         ),
         MovieModel(
           id: '2',
           posterUrl:
               'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title 1234567890 asd asd asdas asd asd as d',
+          movieName: 'Movie Title',
         ),
         MovieModel(
           id: '2',
           posterUrl:
               'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title 1234567890 asd asd asdas asd asd as d',
+          movieName: 'Movie Title',
         ),
         MovieModel(
           id: '2',
           posterUrl:
               'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-          movieName: 'Movie Title 1234567890 asd asd asdas asd asd as d',
+          movieName: 'Movie Title',
         ),
       ],
       onMovieTap: (movie) {

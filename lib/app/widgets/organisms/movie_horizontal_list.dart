@@ -8,7 +8,7 @@ class MovieHorizontalList extends StatelessWidget {
     required this.movies,
     required this.onMovieTap,
     this.spacing = 10,
-    this.padding = EdgeInsets.zero,
+    this.padding = const EdgeInsets.symmetric(horizontal: 8),
     this.cardWidth = 104,
     this.cardHeight = 164,
   });

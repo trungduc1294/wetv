@@ -16,37 +16,37 @@ class HomeView extends GetView<Homecontroller> {
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: Column(
-            children: [
-              // Header
-              HomeHeader(),
-              // Horizon NavBar
-              HorizonNavBar(),
-              Expanded(
-                child: Obx(() {
-                  // Tự động nhảy vào case tương ứng khi selectedIndex.value thay đổi
-                  switch (horizonNavBarController.selectedIndex.value) {
-                    case 0:
-                      return MovieListView();
-                    case 1:
-                      return const Center(
-                        child: Text('Nội dung trang: PHIM TRUYỆN'),
-                      );
-                    case 2:
-                      return const Center(child: Text('Nội dung trang: ANIME'));
-                    case 3:
-                      return const Center(
-                        child: Text('Nội dung trang: CỔ TRANG'),
-                      );
-                    default:
-                      return const SizedBox.shrink();
-                  }
-                }),
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            // Header
+            HomeHeader(),
+            // Horizon NavBar
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: HorizonNavBar(),
+            ),
+            Expanded(
+              child: Obx(() {
+                // Tự động nhảy vào case tương ứng khi selectedIndex.value thay đổi
+                switch (horizonNavBarController.selectedIndex.value) {
+                  case 0:
+                    return MovieListView();
+                  case 1:
+                    return const Center(
+                      child: Text('Nội dung trang: PHIM TRUYỆN'),
+                    );
+                  case 2:
+                    return const Center(child: Text('Nội dung trang: ANIME'));
+                  case 3:
+                    return const Center(
+                      child: Text('Nội dung trang: CỔ TRANG'),
+                    );
+                  default:
+                    return const SizedBox.shrink();
+                }
+              }),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
