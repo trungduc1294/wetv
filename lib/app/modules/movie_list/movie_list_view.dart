@@ -4,14 +4,14 @@ import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/molecules/movie_vertical_card.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
-import 'package:wetv/app/widgets/organisms/movie_horizontal_list.dart';
+import 'package:wetv/app/widgets/organisms/movie_horizontal_card_list.dart';
 
 class MovieListView extends GetView<MovieListController> {
   const MovieListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MovieHorizontalList(
+    return MovieHorizontalCardList(
       movies: [
         MovieModel(
           id: '1',

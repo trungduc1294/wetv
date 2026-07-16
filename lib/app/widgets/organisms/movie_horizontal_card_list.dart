@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/widgets/molecules/movie_vertical_card.dart';
 
-class MovieHorizontalList extends StatelessWidget {
-  const MovieHorizontalList({
+class MovieHorizontalCardList extends StatelessWidget {
+  const MovieHorizontalCardList({
     super.key,
     required this.movies,
     required this.onMovieTap,
