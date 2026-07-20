@@ -7,8 +7,8 @@ class MovieDetailHorizontalPanel extends StatelessWidget {
   const MovieDetailHorizontalPanel({
     super.key,
     required this.detail,
-    this.height = 320,
-    this.sectionSpacing = 12,
+    this.height = 240,
+    this.sectionSpacing = 24,
     this.padding = const EdgeInsets.symmetric(horizontal: 8),
     this.imageRadius = 12,
     this.onAddToPlaylist,
@@ -36,10 +36,12 @@ class MovieDetailHorizontalPanel extends StatelessWidget {
     // [VN] Mỗi section rộng gần full màn, chừa mép để lộ section kế tiếp
     final screenWidth = MediaQuery.sizeOf(context).width;
     final resolvedPadding = padding.resolve(Directionality.of(context));
-    final sectionWidth = screenWidth - resolvedPadding.left - 24;
+    final sectionWidth = screenWidth - resolvedPadding.left - 72;
 
-    return SizedBox(
-      height: height,
+    return Container(
+      height: 300,
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+      color: AppColors.gray_900,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: padding,
@@ -127,11 +129,11 @@ class _OverviewSection extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             color: AppColors.white_primary,
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         // [VN] Hàng tag + icon thêm playlist
         Row(
           children: [
@@ -148,7 +150,7 @@ class _OverviewSection extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 6),
             GestureDetector(
               onTap: onAddToPlaylist,
               child: const Icon(
@@ -166,10 +168,7 @@ class _OverviewSection extends StatelessWidget {
             detail.shortDescription,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: AppColors.gray_600,
-              fontSize: 12,
-            ),
+            style: const TextStyle(color: AppColors.gray_600, fontSize: 12),
           ),
         ],
       ],
@@ -186,7 +185,7 @@ class _TagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
       decoration: BoxDecoration(
         color: tag.filled ? AppColors.orange_primary : Colors.transparent,
         borderRadius: BorderRadius.circular(4),
@@ -196,7 +195,7 @@ class _TagChip extends StatelessWidget {
         tag.label,
         style: const TextStyle(
           color: AppColors.white_primary,
-          fontSize: 11,
+          fontSize: 10,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -286,14 +285,16 @@ class _FeaturedImagesSectionState extends State<_FeaturedImagesSection> {
                               return Container(
                                 width: active ? 8 : 6,
                                 height: active ? 8 : 6,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 3),
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 3,
+                                ),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: active
                                       ? AppColors.white_primary
-                                      : AppColors.white_primary
-                                          .withValues(alpha: 0.4),
+                                      : AppColors.white_primary.withValues(
+                                          alpha: 0.4,
+                                        ),
                                 ),
                               );
                             }),
@@ -321,10 +322,7 @@ class _ReviewsSection extends StatelessWidget {
       children: [
         const Text(
           'đánh giá',
-          style: TextStyle(
-            color: AppColors.gray_600,
-            fontSize: 13,
-          ),
+          style: TextStyle(color: AppColors.gray_600, fontSize: 13),
         ),
         const SizedBox(height: 12),
         Expanded(
@@ -436,10 +434,7 @@ class _SummarySection extends StatelessWidget {
       children: [
         const Text(
           'tóm tắt nội dung',
-          style: TextStyle(
-            color: AppColors.gray_600,
-            fontSize: 13,
-          ),
+          style: TextStyle(color: AppColors.gray_600, fontSize: 13),
         ),
         const SizedBox(height: 12),
         // [VN] ClipRect cắt phần text vượt quá chiều cao còn lại
@@ -522,10 +517,7 @@ class _SideScenesSection extends StatelessWidget {
               alignment: Alignment.center,
               child: const Text(
                 'Thêm nhiều đoạn phim độc quyền',
-                style: TextStyle(
-                  color: AppColors.white_primary,
-                  fontSize: 13,
-                ),
+                style: TextStyle(color: AppColors.white_primary, fontSize: 13),
               ),
             ),
           ),
@@ -562,10 +554,7 @@ class _SideSceneItem extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: Image.network(
-                      scene.thumbnailUrl,
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.network(scene.thumbnailUrl, fit: BoxFit.cover),
                   ),
                   // [VN] Badge thời lượng góc dưới phải thumbnail
                   if (scene.duration.isNotEmpty)
