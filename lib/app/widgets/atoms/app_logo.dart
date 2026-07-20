@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+// [VN] Logo ứng dụng WeTV
 class AppLogo extends StatelessWidget {
   const AppLogo({super.key, this.height = 40, this.width = 40});
   final double height;

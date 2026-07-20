@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // [VN] Vị trí của label so với icon
 enum LabelPosition { left, right, top, bottom }
 
+// [VN] Nút icon có thể kèm label theo các hướng
 class IconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback? onPressed;

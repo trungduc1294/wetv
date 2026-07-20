@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// [VN] Widget text tuỳ biến style (đậm, nghiêng, chữ hoa...)
 class TypographyWidget extends StatelessWidget {
   final String text;
   final Color? color;

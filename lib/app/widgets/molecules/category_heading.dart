@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 
+// [VN] Tiêu đề category kèm nút điều hướng bên phải
 class CategoryHeading extends StatelessWidget {
   const CategoryHeading({
     super.key,

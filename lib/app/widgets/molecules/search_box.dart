@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/atoms/custom_vertical_divider.dart';
 
+// [VN] Ô tìm kiếm gồm prefix, nội dung search và suffix action
 class SearchBox extends StatelessWidget {
   const SearchBox({
     super.key,

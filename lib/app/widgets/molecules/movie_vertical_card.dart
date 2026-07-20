@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 
+// [VN] Card phim dạng dọc: poster đứng + tên bên dưới
 class MovieVerticalCard extends StatelessWidget {
   const MovieVerticalCard({
     super.key,
@@ -32,6 +33,7 @@ class MovieVerticalCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // [VN] Poster đứng bo góc
           ClipRRect(
             borderRadius: BorderRadius.circular(imageRadius),
             child: Image.network(
@@ -42,6 +44,7 @@ class MovieVerticalCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+          // [VN] Tên phim dưới poster
           SizedBox(
             width: width,
             child: Text(

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
 
+// [VN] Thanh điều hướng category ngang trên trang Home
 class HorizonNavBar extends StatelessWidget {
   const HorizonNavBar({super.key});
 

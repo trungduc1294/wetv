@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 
+// [VN] Đường kẻ dọc tuỳ chỉnh dùng làm separator
 class CustomVerticalDivider extends StatelessWidget {
   const CustomVerticalDivider({
     super.key,

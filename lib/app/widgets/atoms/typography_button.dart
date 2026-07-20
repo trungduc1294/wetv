@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wetv/app/widgets/atoms/typography.dart';
 
+// [VN] Nút dạng text dùng TypographyWidget
 class TypographyButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/widgets/molecules/movie_vertical_card.dart';
 
+// [VN] Danh sách ngang các card phim dạng dọc
 class MovieVerticalCardList extends StatelessWidget {
   const MovieVerticalCardList({
     super.key,
