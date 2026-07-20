@@ -16,47 +16,111 @@ class HomeView extends GetView<Homecontroller> {
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(
-        child: Column(
-          children: [
-            // Header
-            HomeHeader(),
-            // Horizon NavBar
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: HorizonNavBar(),
+        child: Obx(() => _buildTabContent(controller.selectedIndex.value)),
+      ),
+      bottomNavigationBar: Obx(
+        () => BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: AppColors.gray_900,
+          currentIndex: controller.selectedIndex.value,
+          onTap: controller.changeTab,
+          selectedItemColor: AppColors.orange_primary,
+          unselectedItemColor: AppColors.gray_600,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Trang chủ',
             ),
-            Expanded(
-              child: Obx(() {
-                // Tự động nhảy vào case tương ứng khi selectedIndex.value thay đổi
-                switch (horizonNavBarController.selectedIndex.value) {
-                  case 0:
-                    return MovieListView();
-                  case 1:
-                    return const Center(
-                      child: Text('Nội dung trang: PHIM TRUYỆN'),
-                    );
-                  case 2:
-                    return const Center(child: Text('Nội dung trang: ANIME'));
-                  case 3:
-                    return const Center(
-                      child: Text('Nội dung trang: CỔ TRANG'),
-                    );
-                  default:
-                    return const SizedBox.shrink();
-                }
-              }),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.play_circle),
+              label: 'Short',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              label: 'Khám phá',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Tài khoản',
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: AppColors.gray_900,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
+    );
+  }
+
+  // [VN] Nội dung theo tab bottom navigation
+  Widget _buildTabContent(int index) {
+    switch (index) {
+      case 0:
+        return _buildHomeTab();
+      case 1:
+        return const Center(
+          child: Text(
+            'Short',
+            style: TextStyle(color: AppColors.white_primary),
+          ),
+        );
+      case 2:
+        return const Center(
+          child: Text(
+            'Khám phá',
+            style: TextStyle(color: AppColors.white_primary),
+          ),
+        );
+      case 3:
+        return const Center(
+          child: Text(
+            'Tài khoản',
+            style: TextStyle(color: AppColors.white_primary),
+          ),
+        );
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  // [VN] Tab Trang chủ: header + category navbar + movie list
+  Widget _buildHomeTab() {
+    return Column(
+      children: [
+        HomeHeader(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: HorizonNavBar(),
+        ),
+        Expanded(
+          child: Obx(() {
+            switch (horizonNavBarController.selectedIndex.value) {
+              case 0:
+                return MovieListView();
+              case 1:
+                return const Center(
+                  child: Text(
+                    'Nội dung trang: PHIM TRUYỆN',
+                    style: TextStyle(color: AppColors.white_primary),
+                  ),
+                );
+              case 2:
+                return const Center(
+                  child: Text(
+                    'Nội dung trang: ANIME',
+                    style: TextStyle(color: AppColors.white_primary),
+                  ),
+                );
+              case 3:
+                return const Center(
+                  child: Text(
+                    'Nội dung trang: CỔ TRANG',
+                    style: TextStyle(color: AppColors.white_primary),
+                  ),
+                );
+              default:
+                return const SizedBox.shrink();
+            }
+          }),
+        ),
+      ],
     );
   }
 }
