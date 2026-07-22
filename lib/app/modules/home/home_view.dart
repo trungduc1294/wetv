@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
+import 'package:wetv/app/modules/account/account_view.dart';
 import 'package:wetv/app/modules/home/home_controller.dart';
 import 'package:wetv/app/modules/movie_list/movie_list_view.dart';
 import 'package:wetv/app/widgets/organisms/home_header.dart';
@@ -69,12 +70,7 @@ class HomeView extends GetView<Homecontroller> {
           ),
         );
       case 3:
-        return const Center(
-          child: Text(
-            'Tài khoản',
-            style: TextStyle(color: AppColors.white_primary),
-          ),
-        );
+        return AccountView();
       default:
         return const SizedBox.shrink();
     }
