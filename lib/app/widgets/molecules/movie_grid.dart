@@ -9,6 +9,7 @@ class MovieGrid extends StatelessWidget {
     required this.movies,
     required this.onMovieTap,
     this.showTitle = true,
+    this.showDescription = false,
     this.crossAxisCount = 2,
     this.spacing = 10,
     this.spacingY,
@@ -17,7 +18,9 @@ class MovieGrid extends StatelessWidget {
     this.imageAspectRatio = 16 / 10,
     this.imageRadius = 10,
     this.movieNameStyle = const TextStyle(color: AppColors.white_primary),
+    this.descriptionStyle = const TextStyle(color: AppColors.gray_600, fontSize: 11),
     this.maxLines = 1,
+    this.descriptionMaxLines = 1,
     this.overflow = TextOverflow.ellipsis,
     this.shrinkWrap = false,
     this.physics,
@@ -27,6 +30,8 @@ class MovieGrid extends StatelessWidget {
   final void Function(MovieModel movie) onMovieTap;
   // [VN] Bật/tắt hiển thị tên phim dưới poster
   final bool showTitle;
+  // [VN] Bật/tắt hiển thị shortDescription dưới tên
+  final bool showDescription;
   final int crossAxisCount;
   // [VN] Khoảng cách ngang giữa các item
   final double spacing;
@@ -38,7 +43,9 @@ class MovieGrid extends StatelessWidget {
   final double imageAspectRatio;
   final double imageRadius;
   final TextStyle movieNameStyle;
+  final TextStyle descriptionStyle;
   final int maxLines;
+  final int descriptionMaxLines;
   final TextOverflow overflow;
   final bool shrinkWrap;
   final ScrollPhysics? physics;
@@ -47,16 +54,30 @@ class MovieGrid extends StatelessWidget {
   double get _mainAxisSpacing =>
       showTitle ? (spacingY ?? spacing) : spacing;
 
-  // [VN] Tính chiều cao khối title để set mainAxisExtent cho grid
+  // [VN] Tính chiều cao khối title (+ description) để set mainAxisExtent
   double _titleBlockHeight(BuildContext context) {
-    if (!showTitle) return 0;
+    if (!showTitle && !showDescription) return 0;
     final style = DefaultTextStyle.of(context).style.merge(movieNameStyle);
     final painter = TextPainter(
       text: TextSpan(text: 'Ag', style: style),
       maxLines: maxLines,
       textDirection: Directionality.of(context),
     )..layout();
-    return titleSpacing + painter.height * maxLines;
+    var height = 0.0;
+    if (showTitle) {
+      height += titleSpacing + painter.height * maxLines;
+    }
+    if (showDescription) {
+      final descStyle =
+          DefaultTextStyle.of(context).style.merge(descriptionStyle);
+      final descPainter = TextPainter(
+        text: TextSpan(text: 'Ag', style: descStyle),
+        maxLines: descriptionMaxLines,
+        textDirection: Directionality.of(context),
+      )..layout();
+      height += 4 + descPainter.height * descriptionMaxLines;
+    }
+    return height;
   }
 
   @override
@@ -89,10 +110,13 @@ class MovieGrid extends StatelessWidget {
             return _MovieGridItem(
               movie: movie,
               showTitle: showTitle,
+              showDescription: showDescription,
               titleSpacing: titleSpacing,
               imageRadius: imageRadius,
               movieNameStyle: movieNameStyle,
+              descriptionStyle: descriptionStyle,
               maxLines: maxLines,
+              descriptionMaxLines: descriptionMaxLines,
               overflow: overflow,
               onTap: () => onMovieTap(movie),
             );
@@ -103,25 +127,31 @@ class MovieGrid extends StatelessWidget {
   }
 }
 
-// [VN] Một ô trong grid: poster + tên phim (tuỳ chọn)
+// [VN] Một ô trong grid: poster + tên phim (+ mô tả tuỳ chọn)
 class _MovieGridItem extends StatelessWidget {
   const _MovieGridItem({
     required this.movie,
     required this.showTitle,
+    required this.showDescription,
     required this.titleSpacing,
     required this.imageRadius,
     required this.movieNameStyle,
+    required this.descriptionStyle,
     required this.maxLines,
+    required this.descriptionMaxLines,
     required this.overflow,
     required this.onTap,
   });
 
   final MovieModel movie;
   final bool showTitle;
+  final bool showDescription;
   final double titleSpacing;
   final double imageRadius;
   final TextStyle movieNameStyle;
+  final TextStyle descriptionStyle;
   final int maxLines;
+  final int descriptionMaxLines;
   final TextOverflow overflow;
   final VoidCallback onTap;
 
@@ -150,6 +180,15 @@ class _MovieGridItem extends StatelessWidget {
               movie.movieName,
               style: movieNameStyle,
               maxLines: maxLines,
+              overflow: overflow,
+            ),
+          ],
+          if (showDescription && movie.shortDescription.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              movie.shortDescription,
+              style: descriptionStyle,
+              maxLines: descriptionMaxLines,
               overflow: overflow,
             ),
           ],

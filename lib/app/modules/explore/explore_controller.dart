@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/ranking_movie_model.dart';
+import 'package:wetv/app/routes/app_routes.dart';
 import 'package:wetv/app/widgets/organisms/explore_filter_groups.dart';
 
 // [VN] Controller tab Khám phá
@@ -162,11 +163,15 @@ class ExploreController extends GetxController {
   // [VN] Navigate search — tạm để trống
   void onSearchTap() {}
 
-  // [VN] Click item ranking — tạm để trống
-  void onRankingMovieTap(RankingMovieModel movie, int rank) {}
+  // [VN] Click item ranking — mở màn chi tiết
+  void onRankingMovieTap(RankingMovieModel movie, int rank) {
+    Get.toNamed(AppRoutes.MOVIE_DETAIL);
+  }
 
-  // [VN] Click item grid filter — tạm để trống
-  void onFilterMovieTap(MovieModel movie) {}
+  // [VN] Click item grid filter — mở màn chi tiết
+  void onFilterMovieTap(MovieModel movie) {
+    Get.toNamed(AppRoutes.MOVIE_DETAIL);
+  }
 
   // [VN] Build danh sách FilterChipGroup từ state hiện tại
   List<FilterChipGroup> get filterGroups {

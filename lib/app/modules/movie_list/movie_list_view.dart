@@ -4,6 +4,7 @@ import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 import 'package:wetv/app/data/models/movie_hero_slide.dart';
+import 'package:wetv/app/routes/app_routes.dart';
 import 'package:wetv/app/widgets/organisms/movie_vertical_card_list.dart';
 import 'package:wetv/app/widgets/organisms/movie_horizontal_card_list.dart';
 import 'package:wetv/app/widgets/organisms/movie_ranking_list.dart';
@@ -14,6 +15,11 @@ import 'package:wetv/app/widgets/molecules/movie_grid.dart';
 
 class MovieListView extends GetView<MovieListController> {
   const MovieListView({super.key});
+
+  // [VN] Mở màn chi tiết phim
+  void _openMovieDetail() {
+    Get.toNamed(AppRoutes.MOVIE_DETAIL);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,7 @@ class MovieListView extends GetView<MovieListController> {
                     'https://picsum.photos/seed/bg4/800/800',
               ),
             ],
-            onSlideTap: (slide, index) {},
+            onSlideTap: (_, index) => _openMovieDetail(),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8),
@@ -88,9 +94,7 @@ class MovieListView extends GetView<MovieListController> {
                 movieName: 'Movie Title',
               ),
             ],
-            onMovieTap: (movie) {
-              print(movie.movieName);
-            },
+            onMovieTap: (_) => _openMovieDetail(),
           ),
 
           SizedBox(height: 20),
@@ -123,9 +127,7 @@ class MovieListView extends GetView<MovieListController> {
                 movieName: 'Movie Title',
               ),
             ],
-            onMovieTap: (movie) {
-              print(movie.movieName);
-            },
+            onMovieTap: (_) => _openMovieDetail(),
           ),
 
           SizedBox(height: 20),
@@ -165,9 +167,7 @@ class MovieListView extends GetView<MovieListController> {
               ),
             ],
             maxRankingItems: 4,
-            onMovieTap: (movie) {
-              print('Ranking: ${movie.movieName}');
-            },
+            onMovieTap: (_) => _openMovieDetail(),
           ),
 
           SizedBox(height: 20),
@@ -204,9 +204,7 @@ class MovieListView extends GetView<MovieListController> {
             spacingY: 16,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            onMovieTap: (movie) {
-              print(movie.movieName);
-            },
+            onMovieTap: (_) => _openMovieDetail(),
           ),
 
           SizedBox(height: 20),

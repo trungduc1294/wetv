@@ -5,6 +5,7 @@ import 'package:wetv/app/modules/account/account_view.dart';
 import 'package:wetv/app/modules/explore/explore_view.dart';
 import 'package:wetv/app/modules/home/home_controller.dart';
 import 'package:wetv/app/modules/movie_list/movie_list_view.dart';
+import 'package:wetv/app/modules/shorts/shorts_view.dart';
 import 'package:wetv/app/widgets/organisms/home_header.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
@@ -57,12 +58,7 @@ class HomeView extends GetView<Homecontroller> {
       case 0:
         return _buildHomeTab();
       case 1:
-        return const Center(
-          child: Text(
-            'Short',
-            style: TextStyle(color: AppColors.white_primary),
-          ),
-        );
+        return ShortsView();
       case 2:
         return ExploreView();
       case 3:
