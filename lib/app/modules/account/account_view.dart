@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/modules/account/account_controller.dart';
+import 'package:wetv/app/routes/app_routes.dart';
 import 'package:wetv/app/widgets/molecules/category_heading.dart';
 import 'package:wetv/app/widgets/molecules/setting_item.dart';
 import 'package:wetv/app/widgets/organisms/account_header.dart';
@@ -57,8 +58,8 @@ class AccountView extends GetView<AccountController> {
               () => ProfileCard(
                 userName: controller.userName.value,
                 avatarUrl: controller.avatarUrl.value,
-                onVipCardTap: () {},
-                onCoinsTap: () {},
+                onVipCardTap: () => Get.toNamed(AppRoutes.VIP_GIFT),
+                onCoinsTap: () => Get.toNamed(AppRoutes.COINS),
                 onAssetsTap: () {},
               ),
             ),

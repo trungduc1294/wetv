@@ -4,6 +4,10 @@ import 'package:wetv/app/modules/home/home_view.dart';
 import 'package:wetv/app/modules/home/home_binding.dart';
 import 'package:wetv/app/modules/movie_detail/movie_detail_view.dart';
 import 'package:wetv/app/modules/movie_detail/movie_detail_binding.dart';
+import 'package:wetv/app/modules/coins/coins_view.dart';
+import 'package:wetv/app/modules/coins/coins_binding.dart';
+import 'package:wetv/app/modules/vip_gift/vip_gift_card_view.dart';
+import 'package:wetv/app/modules/vip_gift/vip_gift_card_binding.dart';
 
 class AppPages {
   static const INITIAL = AppRoutes.HOME;
@@ -23,6 +27,16 @@ class AppPages {
       name: AppRoutes.MOVIE_DETAIL,
       page: () => const MovieDetailView(),
       binding: MovieDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.COINS,
+      page: () => const CoinsView(),
+      binding: CoinsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.VIP_GIFT,
+      page: () => const VipGiftCardView(),
+      binding: VipGiftCardBinding(),
     ),
   ];
 }
