@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/modules/coins/coins_controller.dart';
 import 'package:wetv/app/widgets/molecules/coin_balance_card.dart';
@@ -36,9 +37,9 @@ class CoinsView extends GetView<CoinsController> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        const Text(
-                          'Coins của tôi',
-                          style: TextStyle(
+                        Text(
+                          TrKeys.myCoins.tr,
+                          style: const TextStyle(
                             color: AppColors.primary,
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
@@ -59,17 +60,17 @@ class CoinsView extends GetView<CoinsController> {
                     padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
                     child: GestureDetector(
                       onTap: controller.onLoginTap,
-                      child: const Row(
+                      child: Row(
                         children: [
-                          CircleAvatar(
+                          const CircleAvatar(
                             radius: 18,
                             backgroundColor: Color(0xFFE0E0E0),
                             child: Icon(Icons.person, color: Colors.white),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
-                            'Đăng nhập',
-                            style: TextStyle(
+                            TrKeys.login.tr,
+                            style: const TextStyle(
                               color: AppColors.primary,
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -95,8 +96,8 @@ class CoinsView extends GetView<CoinsController> {
                   CoinBalanceCard(balance: balance),
                   const SizedBox(height: 20),
                   SectionHeaderLink(
-                    title: 'Nạp coins',
-                    actionLabel: 'Coins là gì >',
+                    title: TrKeys.topUpCoins.tr,
+                    actionLabel: TrKeys.whatAreCoins.tr,
                     onActionTap: controller.onWhatAreCoins,
                   ),
                   const SizedBox(height: 12),
@@ -123,9 +124,9 @@ class CoinsView extends GetView<CoinsController> {
                   Center(
                     child: GestureDetector(
                       onTap: controller.onTermsTap,
-                      child: const Text(
-                        'Điều khoản dịch vụ >',
-                        style: TextStyle(
+                      child: Text(
+                        TrKeys.termsOfService.tr,
+                        style: const TextStyle(
                           color: AppColors.gray_600,
                           fontSize: 13,
                         ),
@@ -133,7 +134,7 @@ class CoinsView extends GetView<CoinsController> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const SectionHeaderLink(title: 'Dùng coins để xem'),
+                  SectionHeaderLink(title: TrKeys.useCoinsToWatch.tr),
                   const SizedBox(height: 12),
                   MovieVerticalCardList(
                     movies: movies,

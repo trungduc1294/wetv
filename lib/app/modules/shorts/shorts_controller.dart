@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/short_video_model.dart';
 
@@ -10,13 +11,14 @@ class ShortsController extends GetxController {
   final isPaused = true.obs;
   final selectedChipIndex = 0.obs;
 
-  final chipLabels = const [
-    'Trọn bộ',
-    'Tổng Tài',
-    'Ngược Luyến',
-    'Ngọt Sủng',
-    'Cổ Trang',
-  ];
+  // [VN] Chip đầu là label hệ thống; các chip còn lại là tag nội dung mẫu
+  List<String> get chipLabels => [
+        TrKeys.fullSeries.tr,
+        'Tổng Tài',
+        'Ngược Luyến',
+        'Ngọt Sủng',
+        TrKeys.costume.tr,
+      ];
 
   final videos = <ShortVideoModel>[].obs;
   final allMovies = <MovieModel>[].obs;

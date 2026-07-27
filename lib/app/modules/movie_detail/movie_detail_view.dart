@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
@@ -187,16 +188,16 @@ class _DetailTab extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: onIntroTap,
-                child: const Row(
+                child: Row(
                   children: [
                     Text(
-                      'Giới thiệu',
-                      style: TextStyle(
+                      TrKeys.introduction.tr,
+                      style: const TextStyle(
                         color: AppColors.gray_600,
                         fontSize: 13,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.chevron_right,
                       color: AppColors.gray_600,
                       size: 18,
@@ -229,7 +230,7 @@ class _DetailTab extends StatelessWidget {
                 const SizedBox(width: 8),
               ],
               Text(
-                '${detail.episodeCount} tập',
+                TrKeys.episodeCount.trParams({'count': '${detail.episodeCount}'}),
                 style: const TextStyle(color: AppColors.gray_600, fontSize: 13),
               ),
               const SizedBox(width: 8),
@@ -310,11 +311,11 @@ class _DetailTab extends StatelessWidget {
           onShare: onShare,
           onLike: onLike,
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(12, 8, 12, 10),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
           child: Text(
-            'Diễn viên',
-            style: TextStyle(
+            TrKeys.actors.tr,
+            style: const TextStyle(
               color: AppColors.white_primary,
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -325,11 +326,11 @@ class _DetailTab extends StatelessWidget {
           actors: detail.actors,
           onActorTap: onActorTap,
         ),
-        const Padding(
-          padding: EdgeInsets.fromLTRB(12, 16, 12, 10),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 16, 12, 10),
           child: Text(
-            'Đề xuất cho bạn',
-            style: TextStyle(
+            TrKeys.recommendedForYou.tr,
+            style: const TextStyle(
               color: AppColors.white_primary,
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -449,28 +450,28 @@ class _HeartRankTab extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: const Color(0xFFE8E8E8)),
             ),
-            child: const Row(
+            child: Row(
               children: [
-                Icon(Icons.campaign, color: AppColors.orange_primary, size: 20),
-                SizedBox(width: 8),
+                const Icon(Icons.campaign, color: AppColors.orange_primary, size: 20),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Thông báo chi tiết',
-                    style: TextStyle(
+                    TrKeys.detailedAnnouncement.tr,
+                    style: const TextStyle(
                       color: AppColors.primary,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-                Icon(Icons.chevron_right, color: AppColors.gray_600, size: 18),
+                const Icon(Icons.chevron_right, color: AppColors.gray_600, size: 18),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Bảng xếp hạng nhân vật',
-            style: TextStyle(
+          Text(
+            TrKeys.characterRankingBoard.tr,
+            style: const TextStyle(
               color: AppColors.primary,
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -485,9 +486,9 @@ class _HeartRankTab extends StatelessWidget {
                 color: const Color(0xFFFFE8DE),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text(
-                'Bảng tổng kết',
-                style: TextStyle(
+              child: Text(
+                TrKeys.summaryTable.tr,
+                style: const TextStyle(
                   color: AppColors.orange_primary,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -628,9 +629,9 @@ class _CharacterRankTab extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Text(
-                    'Quy tắc >',
-                    style: TextStyle(
+                  child: Text(
+                    TrKeys.rulesArrow.tr,
+                    style: const TextStyle(
                       color: AppColors.orange_primary,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -640,24 +641,24 @@ class _CharacterRankTab extends StatelessWidget {
               ],
             ),
           ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Row(
             children: [
               Text(
-                'Tháng này',
-                style: TextStyle(
+                TrKeys.thisMonth.tr,
+                style: const TextStyle(
                   color: AppColors.orange_primary,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                'Cập nhật gần đây',
-                style: TextStyle(color: AppColors.white_primary, fontSize: 12),
+                TrKeys.updatedRecently.tr,
+                style: const TextStyle(color: AppColors.white_primary, fontSize: 12),
               ),
-              Icon(
+              const Icon(
                 Icons.keyboard_arrow_down,
                 color: AppColors.orange_primary,
                 size: 18,

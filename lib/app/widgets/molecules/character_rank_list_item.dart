@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_watch_detail_model.dart';
 
@@ -123,7 +125,7 @@ class CharacterRankListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
-            child: const Text('Send Love', style: TextStyle(fontSize: 11)),
+            child: Text(TrKeys.sendLove.tr, style: const TextStyle(fontSize: 11)),
           ),
         ],
       ),

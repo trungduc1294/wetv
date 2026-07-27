@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/modules/account/account_controller.dart';
@@ -41,21 +42,23 @@ class AccountView extends GetView<AccountController> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // [VN] Header: QR + thông báo
-          AccountHeader(
-            onQrTap: () {},
-            onNotificationTap: () {},
-          ),
+    // [VN] Obx để rebuild toàn màn khi đổi locale
+    return Obx(() {
+      controller.localeCode.value;
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // [VN] Header: QR + thông báo
+            AccountHeader(
+              onQrTap: () {},
+              onNotificationTap: () {},
+            ),
 
-          // [VN] Card thông tin người dùng
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Obx(
-              () => ProfileCard(
+            // [VN] Card thông tin người dùng
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ProfileCard(
                 userName: controller.userName.value,
                 avatarUrl: controller.avatarUrl.value,
                 onVipCardTap: () => Get.toNamed(AppRoutes.VIP_GIFT),
@@ -63,64 +66,69 @@ class AccountView extends GetView<AccountController> {
                 onAssetsTap: () {},
               ),
             ),
-          ),
 
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-          // [VN] Section lịch sử xem
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: CategoryHeading(
-              title: 'Lịch sử',
-              icon: Icons.chevron_right,
+            // [VN] Section lịch sử xem
+            Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: CategoryHeading(
+                title: TrKeys.history.tr,
+                icon: Icons.chevron_right,
+                onTap: () {},
+              ),
+            ),
+            MovieHorizontalCardList(
+              movies: _historyMovies,
+              height: 160,
+              onMovieTap: (_) {},
+            ),
+
+            const SizedBox(height: 8),
+
+            // [VN] Nhóm setting 1
+            SettingItem(
+              title: TrKeys.download.tr,
               onTap: () {},
             ),
-          ),
-          MovieHorizontalCardList(
-            movies: _historyMovies,
-            height: 160,
-            onMovieTap: (_) {},
-          ),
-
-          const SizedBox(height: 8),
-
-          // [VN] Nhóm setting 1
-          SettingItem(
-            title: 'Tải xuống',
-            onTap: () {},
-          ),
-          SettingItem(
-            title: 'Xem danh sách & Hẹn trước',
-            onTap: () {},
-          ),
-
-          // [VN] Divider tách nhóm setting
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Divider(
-              color: AppColors.gray_800,
-              thickness: 4,
-              height: 4,
+            SettingItem(
+              title: TrKeys.watchlistReserve.tr,
+              onTap: () {},
             ),
-          ),
 
-          // [VN] Nhóm setting 2
-          SettingItem(
-            title: 'Tải App TV',
-            onTap: () {},
-          ),
-          SettingItem(
-            title: 'Trợ giúp & phản hồi',
-            onTap: () {},
-          ),
-          SettingItem(
-            title: 'Cài đặt',
-            onTap: () {},
-          ),
+            // [VN] Divider tách nhóm setting
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Divider(
+                color: AppColors.gray_800,
+                thickness: 4,
+                height: 4,
+              ),
+            ),
 
-          const SizedBox(height: 24),
-        ],
-      ),
-    );
+            // [VN] Nhóm setting 2
+            SettingItem(
+              title: TrKeys.downloadTvApp.tr,
+              onTap: () {},
+            ),
+            SettingItem(
+              title: TrKeys.helpFeedback.tr,
+              onTap: () {},
+            ),
+            SettingItem(
+              title: TrKeys.language.tr,
+              trailingText: controller.currentLanguageLabel,
+              onTap: controller.openLanguagePicker,
+            ),
+            SettingItem(
+              title: TrKeys.settings.tr,
+              onTap: () {},
+            ),
+
+            const SizedBox(height: 24),
+          ],
+        ),
+      );
+    });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
@@ -63,7 +64,7 @@ class MovieListView extends GetView<MovieListController> {
           Padding(
             padding: EdgeInsets.only(left: 8),
             child: CategoryHeading(
-              title: 'Tiep tuc xem',
+              title: TrKeys.continueWatching.tr,
               icon: Icons.arrow_forward_ios,
             ),
           ),
@@ -135,7 +136,7 @@ class MovieListView extends GetView<MovieListController> {
           Padding(
             padding: EdgeInsets.only(left: 8),
             child: CategoryHeading(
-              title: 'Bang xep hang',
+              title: TrKeys.ranking.tr,
               icon: Icons.arrow_forward_ios,
             ),
           ),

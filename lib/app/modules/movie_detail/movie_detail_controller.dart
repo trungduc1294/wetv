@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/movie_watch_detail_model.dart';
@@ -10,13 +11,14 @@ class MovieDetailController extends GetxController {
 
   late final MovieWatchDetail detail;
 
-  final tabs = const [
-    MovieDetailTabLabel(label: 'Chi tiết'),
-    MovieDetailTabLabel(label: 'Cảnh Bên Lề', showPlayIcon: true),
-    MovieDetailTabLabel(label: 'Ảnh Đẹp'),
-    MovieDetailTabLabel(label: 'Thả tim'),
-    MovieDetailTabLabel(label: 'BXH nhân vật'),
-  ];
+  // [VN] Tab label cố định — i18n
+  List<MovieDetailTabLabel> get tabs => [
+        MovieDetailTabLabel(label: TrKeys.detail.tr),
+        MovieDetailTabLabel(label: TrKeys.sideScenes.tr, showPlayIcon: true),
+        MovieDetailTabLabel(label: TrKeys.beautifulPhotos.tr),
+        MovieDetailTabLabel(label: TrKeys.heartTab.tr),
+        MovieDetailTabLabel(label: TrKeys.characterRankTab.tr),
+      ];
 
   @override
   void onInit() {

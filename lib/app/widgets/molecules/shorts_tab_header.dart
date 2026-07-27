@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/atoms/app_logo.dart';
 
@@ -9,7 +11,7 @@ class ShortsTabHeader extends StatelessWidget {
     required this.selectedIndex,
     required this.onTabChanged,
     this.onMoreTap,
-    this.tabs = const ['For You', 'All'],
+    this.tabs,
     this.showLogo = true,
   });
 
@@ -17,11 +19,13 @@ class ShortsTabHeader extends StatelessWidget {
   final int selectedIndex;
   final void Function(int index) onTabChanged;
   final VoidCallback? onMoreTap;
-  final List<String> tabs;
+  final List<String>? tabs;
   final bool showLogo;
 
   @override
   Widget build(BuildContext context) {
+    final labels = tabs ?? [TrKeys.forYou.tr, TrKeys.all.tr];
+
     return SizedBox(
       height: 48,
       child: Stack(
@@ -29,7 +33,7 @@ class ShortsTabHeader extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(tabs.length, (index) {
+            children: List.generate(labels.length, (index) {
               final selected = selectedIndex == index;
               return GestureDetector(
                 onTap: () => onTabChanged(index),
@@ -37,7 +41,7 @@ class ShortsTabHeader extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                   child: Text(
-                    tabs[index],
+                    labels[index],
                     style: TextStyle(
                       color: selected
                           ? AppColors.white_primary

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 
@@ -97,9 +99,9 @@ class MovieIntroPanel extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'đánh giá kịch',
-                  style: TextStyle(
+                Text(
+                  TrKeys.dramaReviews.tr,
+                  style: const TextStyle(
                     color: AppColors.white_primary,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/modules/vip_gift/vip_gift_card_controller.dart';
 import 'package:wetv/app/widgets/molecules/filter_chip_item.dart';
@@ -22,9 +23,9 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
           icon: const Icon(Icons.arrow_back_ios_new, size: 18),
           color: AppColors.white_primary,
         ),
-        title: const Text(
-          'Give VIP gift cards to friends',
-          style: TextStyle(
+        title: Text(
+          TrKeys.giveVipGiftTitle.tr,
+          style: const TextStyle(
             color: AppColors.white_primary,
             fontSize: 16,
             fontWeight: FontWeight.w600,
@@ -47,10 +48,10 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                 children: [
                   Row(
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'Select VIP card',
-                          style: TextStyle(
+                          TrKeys.selectVipCard.tr,
+                          style: const TextStyle(
                             color: AppColors.white_primary,
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -59,13 +60,13 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                       ),
                       _HeaderAction(
                         icon: Icons.description_outlined,
-                        label: 'Rules',
+                        label: TrKeys.rules.tr,
                         onTap: controller.onRulesTap,
                       ),
                       const SizedBox(width: 12),
                       _HeaderAction(
                         icon: Icons.confirmation_number_outlined,
-                        label: 'Purchased',
+                        label: TrKeys.purchased.tr,
                         onTap: controller.onPurchasedTap,
                       ),
                     ],
@@ -94,17 +95,17 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                         const SizedBox(width: 8),
                         GestureDetector(
                           onTap: controller.onViewAllTap,
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
-                                'View all',
-                                style: TextStyle(
+                                TrKeys.viewAll.tr,
+                                style: const TextStyle(
                                   color: AppColors.orange_primary,
                                   fontSize: 12,
                                 ),
                               ),
-                              SizedBox(width: 2),
-                              Icon(
+                              const SizedBox(width: 2),
+                              const Icon(
                                 Icons.view_list,
                                 color: AppColors.orange_primary,
                                 size: 16,
@@ -118,17 +119,17 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                   const SizedBox(height: 14),
                   VipGiftCardPreview(card: cards[cardIndex]),
                   const SizedBox(height: 8),
-                  const Text(
-                    'The card picture cannot be changed after payment',
-                    style: TextStyle(
+                  Text(
+                    TrKeys.cardPictureHint.tr,
+                    style: const TextStyle(
                       color: AppColors.gray_600,
                       fontSize: 12,
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Choose a package',
-                    style: TextStyle(
+                  Text(
+                    TrKeys.choosePackage.tr,
+                    style: const TextStyle(
                       color: AppColors.white_primary,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
@@ -157,9 +158,9 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Number of cards purchased',
-                    style: TextStyle(
+                  Text(
+                    TrKeys.numberOfCards.tr,
+                    style: const TextStyle(
                       color: AppColors.white_primary,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
@@ -225,9 +226,9 @@ class VipGiftCardView extends GetView<VipGiftCardController> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                       ),
-                      child: const Text(
-                        'Confirm to pay',
-                        style: TextStyle(
+                      child: Text(
+                        TrKeys.confirmToPay.tr,
+                        style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),

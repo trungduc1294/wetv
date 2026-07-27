@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/atoms/app_logo.dart';
 import 'package:wetv/app/widgets/atoms/typography_button.dart';
@@ -26,7 +28,7 @@ class HomeHeader extends StatelessWidget {
             ),
             prefixIcon: Icon(Icons.search, color: AppColors.white_primary),
             suffixActionButton: TypographyButton(
-              text: "Lọc",
+              text: TrKeys.filter.tr,
               onPressed: () {},
               color: AppColors.white_primary,
             ),

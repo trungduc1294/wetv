@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/ranking_movie_model.dart';
 import 'package:wetv/app/routes/app_routes.dart';
@@ -17,32 +18,58 @@ class ExploreController extends GetxController {
   // [VN] Index selected theo từng nhóm filter tab Lọc
   final filterSelectedIndexes = <int>[0, 1, 0, 0, 0, 0, 0].obs;
 
-  final dropdownOptions = const [
-    'Trọn bộ',
-    'Phim truyền hình',
-    'Phim điện ảnh',
-    'Phim ngắn',
-    'Chương trình giải trí',
-    'Anime',
-    'Thiếu nhi',
-    'Hồng hoa',
-  ];
+  // [VN] Label filter cố định — dùng i18n (không const vì .tr phụ thuộc locale)
+  List<String> get dropdownOptions => [
+        TrKeys.fullSeries.tr,
+        TrKeys.tvSeries.tr,
+        TrKeys.movies.tr,
+        TrKeys.shortFilm.tr,
+        TrKeys.entertainment.tr,
+        TrKeys.anime.tr,
+        TrKeys.kids.tr,
+        TrKeys.variety.tr,
+      ];
 
-  final rankingChipLabels = const [
-    'Đang hot tại Việt Nam',
-    'Tìm kiếm hot nhất',
-    'BXH tuần',
-  ];
+  List<String> get rankingChipLabels => [
+        TrKeys.hotInVietnam.tr,
+        TrKeys.hottestSearch.tr,
+        TrKeys.weeklyRanking.tr,
+      ];
 
-  final filterGroupOptions = const [
-    ['Hot nhất', 'Mới nhất', 'Đánh giá'],
-    ['Trọn bộ', 'Phim truyền hình', 'Phim điện ảnh', 'Anime'],
-    ['Trọn bộ', 'Phim ngắn'],
-    ['Trọn bộ', 'Phim truyện', 'Lãng mạn', 'Kỳ ảo', 'Cổ trang'],
-    ['Trọn bộ', 'Trung Quốc', 'Hàn Quốc', 'Thái Lan', 'Nhật Bản'],
-    ['Trọn bộ', 'VIP', 'Miễn phí'],
-    ['Trọn bộ', '2026', '2025', '2024', '2023', '2022'],
-  ];
+  List<List<String>> get filterGroupOptions => [
+        [TrKeys.hottest.tr, TrKeys.newest.tr, TrKeys.rating.tr],
+        [
+          TrKeys.fullSeries.tr,
+          TrKeys.tvSeries.tr,
+          TrKeys.movies.tr,
+          TrKeys.anime.tr,
+        ],
+        [TrKeys.fullSeries.tr, TrKeys.shortFilm.tr],
+        [
+          TrKeys.fullSeries.tr,
+          TrKeys.drama.tr,
+          TrKeys.romance.tr,
+          TrKeys.fantasy.tr,
+          TrKeys.costume.tr,
+        ],
+        [
+          TrKeys.fullSeries.tr,
+          TrKeys.china.tr,
+          TrKeys.korea.tr,
+          TrKeys.thailand.tr,
+          TrKeys.japan.tr,
+        ],
+        [TrKeys.fullSeries.tr, TrKeys.vip.tr, TrKeys.free.tr],
+        // [VN] Năm là dữ liệu, giữ nguyên
+        [
+          TrKeys.fullSeries.tr,
+          '2026',
+          '2025',
+          '2024',
+          '2023',
+          '2022',
+        ],
+      ];
 
   final rankingMovies = <RankingMovieModel>[].obs;
   final filterMovies = <MovieModel>[].obs;
@@ -160,7 +187,7 @@ class ExploreController extends GetxController {
   // [VN] Fetch data theo filter — tạm để trống
   void fetchFilterData() {}
 
-  // [VN] Navigate search — tạm để trống
+  // [VN] Navigate search — tạm thời trống
   void onSearchTap() {}
 
   // [VN] Click item ranking — mở màn chi tiết

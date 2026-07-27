@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 
 // [VN] Card hiển thị số dư coins
@@ -6,11 +8,11 @@ class CoinBalanceCard extends StatelessWidget {
   const CoinBalanceCard({
     super.key,
     required this.balance,
-    this.label = 'Số dư',
+    this.label,
   });
 
   final int balance;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CoinBalanceCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            label,
+            label ?? TrKeys.balance.tr,
             style: const TextStyle(
               color: AppColors.primary,
               fontSize: 13,

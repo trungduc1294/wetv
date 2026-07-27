@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 
 // [VN] Header tab Khám phá: chuyển BXH / Lọc + icon search
@@ -8,17 +10,19 @@ class ExploreTabHeader extends StatelessWidget {
     required this.selectedIndex,
     required this.onTabChanged,
     this.onSearchTap,
-    this.tabs = const ['BXH', 'Lọc'],
+    this.tabs,
   });
 
   // [VN] 0 = BXH, 1 = Lọc
   final int selectedIndex;
   final void Function(int index) onTabChanged;
   final VoidCallback? onSearchTap;
-  final List<String> tabs;
+  final List<String>? tabs;
 
   @override
   Widget build(BuildContext context) {
+    final labels = tabs ?? [TrKeys.bxh.tr, TrKeys.filter.tr];
+
     return SizedBox(
       height: 48,
       child: Stack(
@@ -27,7 +31,7 @@ class ExploreTabHeader extends StatelessWidget {
           // [VN] Tabs BXH / Lọc căn giữa
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(tabs.length, (index) {
+            children: List.generate(labels.length, (index) {
               final selected = selectedIndex == index;
               return GestureDetector(
                 onTap: () => onTabChanged(index),
@@ -35,7 +39,7 @@ class ExploreTabHeader extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    tabs[index],
+                    labels[index],
                     style: TextStyle(
                       color: selected
                           ? AppColors.white_primary

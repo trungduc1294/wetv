@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/modules/account/account_view.dart';
 import 'package:wetv/app/modules/explore/explore_view.dart';
@@ -29,22 +30,22 @@ class HomeView extends GetView<Homecontroller> {
           onTap: controller.changeTab,
           selectedItemColor: AppColors.orange_primary,
           unselectedItemColor: AppColors.gray_600,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Trang chủ',
+              icon: const Icon(Icons.home),
+              label: TrKeys.navHome.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.play_circle),
-              label: 'Short',
+              icon: const Icon(Icons.play_circle),
+              label: TrKeys.navShort.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.explore),
-              label: 'Khám phá',
+              icon: const Icon(Icons.explore),
+              label: TrKeys.navExplore.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Tài khoản',
+              icon: const Icon(Icons.person),
+              label: TrKeys.navAccount.tr,
             ),
           ],
         ),
@@ -83,24 +84,30 @@ class HomeView extends GetView<Homecontroller> {
               case 0:
                 return MovieListView();
               case 1:
-                return const Center(
+                return Center(
                   child: Text(
-                    'Nội dung trang: PHIM TRUYỆN',
-                    style: TextStyle(color: AppColors.white_primary),
+                    TrKeys.contentPagePrefix.trParams({
+                      'name': TrKeys.filmStory.tr,
+                    }),
+                    style: const TextStyle(color: AppColors.white_primary),
                   ),
                 );
               case 2:
-                return const Center(
+                return Center(
                   child: Text(
-                    'Nội dung trang: ANIME',
-                    style: TextStyle(color: AppColors.white_primary),
+                    TrKeys.contentPagePrefix.trParams({
+                      'name': TrKeys.anime.tr,
+                    }),
+                    style: const TextStyle(color: AppColors.white_primary),
                   ),
                 );
               case 3:
-                return const Center(
+                return Center(
                   child: Text(
-                    'Nội dung trang: CỔ TRANG',
-                    style: TextStyle(color: AppColors.white_primary),
+                    TrKeys.contentPagePrefix.trParams({
+                      'name': TrKeys.costume.tr.toUpperCase(),
+                    }),
+                    style: const TextStyle(color: AppColors.white_primary),
                   ),
                 );
               default:

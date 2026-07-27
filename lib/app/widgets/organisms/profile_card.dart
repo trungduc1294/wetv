@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/widgets/molecules/profile_action_link.dart';
 
@@ -8,8 +10,8 @@ class ProfileCard extends StatelessWidget {
     super.key,
     required this.userName,
     this.avatarUrl = '',
-    this.statusTitle = 'VIP Active',
-    this.statusSubtitle = 'Enjoy all features',
+    this.statusTitle,
+    this.statusSubtitle,
     this.onVipCardTap,
     this.onCoinsTap,
     this.onAssetsTap,
@@ -20,8 +22,8 @@ class ProfileCard extends StatelessWidget {
 
   final String userName;
   final String avatarUrl;
-  final String statusTitle;
-  final String statusSubtitle;
+  final String? statusTitle;
+  final String? statusSubtitle;
   final VoidCallback? onVipCardTap;
   final VoidCallback? onCoinsTap;
   final VoidCallback? onAssetsTap;
@@ -75,7 +77,7 @@ class ProfileCard extends StatelessWidget {
           const SizedBox(height: 16),
           // [VN] Trạng thái VIP
           Text(
-            statusTitle,
+            statusTitle ?? TrKeys.vipActive.tr,
             style: const TextStyle(
               color: AppColors.white_primary,
               fontSize: 14,
@@ -84,7 +86,7 @@ class ProfileCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            statusSubtitle,
+            statusSubtitle ?? TrKeys.enjoyAllFeatures.tr,
             style: const TextStyle(
               color: AppColors.gray_600,
               fontSize: 12,
@@ -96,15 +98,15 @@ class ProfileCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ProfileActionLink(
-                label: 'Thẻ VIP',
+                label: TrKeys.vipCard.tr,
                 onTap: onVipCardTap,
               ),
               ProfileActionLink(
-                label: 'Coins của tôi',
+                label: TrKeys.myCoins.tr,
                 onTap: onCoinsTap,
               ),
               ProfileActionLink(
-                label: 'Tài sản của tôi',
+                label: TrKeys.myAssets.tr,
                 onTap: onAssetsTap,
               ),
             ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/movie_watch_detail_model.dart';
@@ -31,10 +33,10 @@ class ActorProfilePanel extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 16, 8, 8),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    'Hồ sơ cá nhân',
-                    style: TextStyle(
+                    TrKeys.personalProfile.tr,
+                    style: const TextStyle(
                       color: AppColors.white_primary,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -93,22 +95,22 @@ class ActorProfilePanel extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'Giới thiệu',
-                  style: TextStyle(
+                Text(
+                  TrKeys.introduction.tr,
+                  style: const TextStyle(
                     color: AppColors.white_primary,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 10),
-                _InfoRow(label: 'Giới tính', value: actor.gender),
-                _InfoRow(label: 'Sinh nhật', value: actor.birthday),
-                _InfoRow(label: 'Chòm sao', value: actor.zodiac),
+                _InfoRow(label: TrKeys.gender.tr, value: actor.gender),
+                _InfoRow(label: TrKeys.birthday.tr, value: actor.birthday),
+                _InfoRow(label: TrKeys.zodiac.tr, value: actor.zodiac),
                 const SizedBox(height: 20),
-                const Text(
-                  'Tác phẩm của anh ấy/cô ấy',
-                  style: TextStyle(
+                Text(
+                  TrKeys.hisHerWorks.tr,
+                  style: const TextStyle(
                     color: AppColors.white_primary,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,

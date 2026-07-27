@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 
@@ -241,9 +243,9 @@ class _FeaturedImagesSectionState extends State<_FeaturedImagesSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Ảnh Đẹp',
-          style: TextStyle(
+        Text(
+          TrKeys.beautifulPhotos.tr,
+          style: const TextStyle(
             color: AppColors.white_primary,
             fontSize: 15,
             fontWeight: FontWeight.w500,
@@ -320,9 +322,9 @@ class _ReviewsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'đánh giá',
-          style: TextStyle(color: AppColors.gray_600, fontSize: 13),
+        Text(
+          TrKeys.reviews.tr,
+          style: const TextStyle(color: AppColors.gray_600, fontSize: 13),
         ),
         const SizedBox(height: 12),
         Expanded(
@@ -432,9 +434,9 @@ class _SummarySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'tóm tắt nội dung',
-          style: TextStyle(color: AppColors.gray_600, fontSize: 13),
+        Text(
+          TrKeys.contentSummary.tr,
+          style: const TextStyle(color: AppColors.gray_600, fontSize: 13),
         ),
         const SizedBox(height: 12),
         // [VN] ClipRect cắt phần text vượt quá chiều cao còn lại
@@ -475,9 +477,9 @@ class _SideScenesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Cảnh Bên Lề',
-          style: TextStyle(
+        Text(
+          TrKeys.sideScenes.tr,
+          style: const TextStyle(
             color: AppColors.white_primary,
             fontSize: 15,
             fontWeight: FontWeight.w500,
@@ -515,9 +517,9 @@ class _SideScenesSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
               ),
               alignment: Alignment.center,
-              child: const Text(
-                'Thêm nhiều đoạn phim độc quyền',
-                style: TextStyle(color: AppColors.white_primary, fontSize: 13),
+              child: Text(
+                TrKeys.moreExclusiveClips.tr,
+                style: const TextStyle(color: AppColors.white_primary, fontSize: 13),
               ),
             ),
           ),
