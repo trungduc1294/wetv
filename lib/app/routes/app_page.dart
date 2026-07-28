@@ -8,6 +8,8 @@ import 'package:wetv/app/modules/coins/coins_view.dart';
 import 'package:wetv/app/modules/coins/coins_binding.dart';
 import 'package:wetv/app/modules/vip_gift/vip_gift_card_view.dart';
 import 'package:wetv/app/modules/vip_gift/vip_gift_card_binding.dart';
+import 'package:wetv/app/modules/search/search_view.dart';
+import 'package:wetv/app/modules/search/search_binding.dart';
 
 class AppPages {
   static const INITIAL = AppRoutes.HOME;
@@ -22,6 +24,11 @@ class AppPages {
       name: AppRoutes.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SEARCH,
+      page: () => const SearchView(),
+      binding: SearchBinding(),
     ),
     GetPage(
       name: AppRoutes.MOVIE_DETAIL,

@@ -96,4 +96,7 @@ const Map<String, String> enUs = {
   TrKeys.language: 'Language',
   TrKeys.langVi: 'Tiếng Việt',
   TrKeys.langEn: 'English',
+  TrKeys.cancel: 'Cancel',
+  TrKeys.topSearches: 'Top searches',
+  TrKeys.searchHint: 'Search',
 };

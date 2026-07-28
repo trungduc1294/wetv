@@ -8,35 +8,47 @@ class SearchBox extends StatelessWidget {
     super.key,
     this.prefixIcon,
     this.suffixActionButton,
+    this.onTap,
     required this.SearchWidget,
   });
 
   final Widget? prefixIcon;
   final Widget? suffixActionButton;
   final Widget SearchWidget;
+  // [VN] Tap vào vùng search (prefix + nội dung) — không gồm nút filter
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.gray_800,
         borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: Row(
         spacing: 6,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // [VN] Nêú có prefix icon thì hiển thị
-          prefixIcon ?? prefixIcon!,
+          // [VN] Vùng search có thể tap để mở màn Search
+          Expanded(
+            child: GestureDetector(
+              onTap: onTap,
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                spacing: 6,
+                children: [
+                  if (prefixIcon != null) prefixIcon!,
+                  Expanded(child: SearchWidget),
+                ],
+              ),
+            ),
+          ),
 
-          // [VN] Nêú có search widget thì hiển thị
-          Expanded(child: SearchWidget),
-
-          CustomVerticalDivider(margin: EdgeInsets.only(right: 4)),
-
-          // [VN] Nêú có suffix action button thì hiển thị
-          suffixActionButton ?? suffixActionButton!,
+          if (suffixActionButton != null) ...[
+            const CustomVerticalDivider(margin: EdgeInsets.only(right: 4)),
+            suffixActionButton!,
+          ],
         ],
       ),
     );

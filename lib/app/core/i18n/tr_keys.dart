@@ -94,4 +94,7 @@ abstract class TrKeys {
   static const language = 'language';
   static const langVi = 'lang_vi';
   static const langEn = 'lang_en';
+  static const cancel = 'cancel';
+  static const topSearches = 'top_searches';
+  static const searchHint = 'search_hint';
 }

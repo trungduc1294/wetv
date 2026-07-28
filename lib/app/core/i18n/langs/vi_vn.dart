@@ -96,4 +96,7 @@ const Map<String, String> viVn = {
   TrKeys.language: 'Ngôn ngữ',
   TrKeys.langVi: 'Tiếng Việt',
   TrKeys.langEn: 'English',
+  TrKeys.cancel: 'Huỷ bỏ',
+  TrKeys.topSearches: 'Tìm kiếm hàng đầu',
+  TrKeys.searchHint: 'Tìm kiếm',
 };
