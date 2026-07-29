@@ -11,13 +11,13 @@ class MovieModel {
     this.shortDescription = '',
   });
 
-  // [VN] Tạo factory method từ JSON
-  factory MovieModel.fromJson(Map<String, dynamic> json) {
+  // [VN] Tạo factory method từ JSON; id lấy từ JSON hoặc fallback theo index
+  factory MovieModel.fromJson(Map<String, dynamic> json, int index) {
     return MovieModel(
-      id: json['id'],
-      posterUrl: json['posterUrl'],
-      movieName: json['movieName'],
-      shortDescription: json['shortDescription'],
+      id: json['id']?.toString() ?? '$index',
+      posterUrl: json['posterUrl'] as String,
+      movieName: json['movieName'] as String,
+      shortDescription: (json['shortDescription'] as String?) ?? '',
     );
   }
 
