@@ -14,6 +14,9 @@ import 'package:wetv/app/widgets/molecules/movie_grid.dart';
 class MovieListView extends GetView<MovieListController> {
   const MovieListView({super.key});
 
+  // [VN] Chiều cao hero slider, HomeView dùng để tính ngưỡng đổi nền header
+  static const double heroSliderHeight = 560;
+
   // [VN] Mở màn chi tiết phim
   void _openMovieDetail() {
     Get.toNamed(AppRoutes.MOVIE_DETAIL);
@@ -29,7 +32,7 @@ class MovieListView extends GetView<MovieListController> {
         children: [
           Obx(
             () => MovieHeroSlider(
-              height: 420,
+              height: heroSliderHeight,
               slides: movieListController.movieHeroSlides.toList(),
               onSlideTap: (_, index) => _openMovieDetail(),
             ),
@@ -74,7 +77,7 @@ class MovieListView extends GetView<MovieListController> {
           Obx(
             () => MovieRankingList(
               movies: movieListController.movieList.toList(),
-              maxRankingItems: 4,
+              maxRankingItems: 10,
               onMovieTap: (_) => _openMovieDetail(),
             ),
           ),

@@ -4,8 +4,15 @@ class Homecontroller extends GetxController {
   // [VN] Index tab BottomNavigationBar đang chọn
   final selectedIndex = 0.obs;
 
+  // [VN] Offset scroll dọc của nội dung tab Home, dùng để đổi nền header
+  final scrollOffset = 0.0.obs;
+
   // [VN] Đổi tab bottom navigation
   void changeTab(int index) {
     selectedIndex.value = index;
+  }
+
+  void updateScrollOffset(double offset) {
+    scrollOffset.value = offset;
   }
 }

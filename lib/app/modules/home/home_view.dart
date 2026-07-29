@@ -15,13 +15,17 @@ class HomeView extends GetView<Homecontroller> {
   HomeView({super.key});
   final horizonNavBarController = Get.put(Horizonnavbarcontroller());
 
+  // [VN] Chiều cao phần header (search row + category navbar + vùng gradient) để chừa chỗ nội dung
+  static const double _headerHeight = 132;
+
+  // [VN] Khoảng scroll để header chuyển dần sang nền primary đặc
+  static const double _headerFadeDistance = 80;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: SafeArea(
-        child: Obx(() => _buildTabContent(controller.selectedIndex.value)),
-      ),
+      body: Obx(() => _buildTabContent(controller.selectedIndex.value)),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -59,63 +63,122 @@ class HomeView extends GetView<Homecontroller> {
       case 0:
         return _buildHomeTab();
       case 1:
-        return ShortsView();
+        return SafeArea(child: ShortsView());
       case 2:
-        return ExploreView();
+        return SafeArea(child: ExploreView());
       case 3:
-        return AccountView();
+        return SafeArea(child: AccountView());
       default:
         return const SizedBox.shrink();
     }
   }
 
-  // [VN] Tab Trang chủ: header + category navbar + movie list
+  // [VN] Tab Trang chủ: nội dung tràn full, header nổi phía trên hero slide
   Widget _buildHomeTab() {
-    return Column(
-      children: [
-        HomeHeader(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: HorizonNavBar(),
+    return NotificationListener<ScrollNotification>(
+      // [VN] Chỉ lấy scroll dọc, bỏ qua các list ngang bên trong
+      onNotification: (notification) {
+        if (notification.metrics.axis == Axis.vertical) {
+          controller.updateScrollOffset(notification.metrics.pixels);
+        }
+        return false;
+      },
+      child: Stack(
+        children: [
+          Positioned.fill(child: Obx(() => _buildCategoryContent())),
+          Positioned(top: 0, left: 0, right: 0, child: _buildFloatingHeader()),
+        ],
+      ),
+    );
+  }
+
+  // [VN] Header mờ trên hero slide, chuyển sang nền primary khi scroll qua hero
+  Widget _buildFloatingHeader() {
+    // [VN] Dựng sẵn nội dung ngoài Obx để không rebuild lại khi scroll
+    final Widget headerContent = SafeArea(
+      bottom: false,
+      child: Column(
+        children: [
+          HomeHeader(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: HorizonNavBar(),
+          ),
+        ],
+      ),
+    );
+
+    return Obx(
+      () => DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: _headerGradient(_headerSolidProgress()),
         ),
-        Expanded(
-          child: Obx(() {
-            switch (horizonNavBarController.selectedIndex.value) {
-              case 0:
-                return MovieListView();
-              case 1:
-                return Center(
-                  child: Text(
-                    TrKeys.contentPagePrefix.trParams({
-                      'name': TrKeys.filmStory.tr,
-                    }),
-                    style: const TextStyle(color: AppColors.white_primary),
-                  ),
-                );
-              case 2:
-                return Center(
-                  child: Text(
-                    TrKeys.contentPagePrefix.trParams({
-                      'name': TrKeys.anime.tr,
-                    }),
-                    style: const TextStyle(color: AppColors.white_primary),
-                  ),
-                );
-              case 3:
-                return Center(
-                  child: Text(
-                    TrKeys.contentPagePrefix.trParams({
-                      'name': TrKeys.costume.tr.toUpperCase(),
-                    }),
-                    style: const TextStyle(color: AppColors.white_primary),
-                  ),
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          }),
+        child: headerContent,
+      ),
+    );
+  }
+
+  // [VN] 0 = đang nằm trên hero slide, 1 = đã scroll qua hero
+  double _headerSolidProgress() {
+    // [VN] Các tab category khác không có hero slide nên dùng nền đặc luôn
+    if (horizonNavBarController.selectedIndex.value != 0) return 1;
+
+    final double fadeStart =
+        MovieListView.heroSliderHeight - _headerHeight - _headerFadeDistance;
+    final double scrolled = controller.scrollOffset.value - fadeStart;
+    return (scrolled / _headerFadeDistance).clamp(0.0, 1.0);
+  }
+
+  // [VN] Gradient chuyển dần về primary đặc theo progress
+  LinearGradient _headerGradient(double progress) {
+    final List<Color> heroColors = [
+      AppColors.orange_primary.withValues(alpha: 0.75),
+      AppColors.orange_primary.withValues(alpha: 0.55),
+      AppColors.orange_primary.withValues(alpha: 0.45),
+      AppColors.orange_primary.withValues(alpha: 0),
+    ];
+
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: heroColors
+          .map((color) => Color.lerp(color, AppColors.gray_900, progress)!)
+          .toList(),
+      stops: const [0, 0.45, 0.75, 1],
+    );
+  }
+
+  // [VN] Nội dung theo tab category ngang
+  Widget _buildCategoryContent() {
+    // [VN] Đổi tab -> scroll view mới bắt đầu từ 0, đồng bộ lại offset cho header
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => controller.updateScrollOffset(0),
+    );
+
+    switch (horizonNavBarController.selectedIndex.value) {
+      case 0:
+        return MovieListView();
+      case 1:
+        return _buildPlaceholder(TrKeys.filmStory.tr);
+      case 2:
+        return _buildPlaceholder(TrKeys.anime.tr);
+      case 3:
+        return _buildPlaceholder(TrKeys.costume.tr.toUpperCase());
+      default:
+        return const SizedBox.shrink();
+    }
+  }
+
+  // [VN] Tab chưa có nội dung: chừa chỗ cho header nổi phía trên
+  Widget _buildPlaceholder(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(top: _headerHeight),
+      child: Center(
+        child: Text(
+          TrKeys.contentPagePrefix.trParams({'name': name}),
+          style: const TextStyle(color: AppColors.white_primary),
         ),
-      ],
+      ),
     );
   }
 }
