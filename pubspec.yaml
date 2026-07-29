@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/images/logo.webp
     - lib/app/data/dump/categories.json
+    - lib/app/data/dump/movie_hero_slide.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

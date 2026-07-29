@@ -11,4 +11,12 @@ class MovieHeroSlide {
   final String foregroundUrl;
   // [VN] Ảnh nền phía sau, chuyển bằng fade khi đổi slide
   final String backgroundUrl;
+
+  factory MovieHeroSlide.fromJson(Map<String, dynamic> json) {
+    return MovieHeroSlide(
+      title: json['title'],
+      foregroundUrl: json['foregroundUrl'],
+      backgroundUrl: json['backgroundUrl'],
+    );
+  }
 }

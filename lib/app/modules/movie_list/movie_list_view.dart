@@ -4,7 +4,6 @@ import 'package:wetv/app/core/i18n/tr_keys.dart';
 import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
-import 'package:wetv/app/data/models/movie_hero_slide.dart';
 import 'package:wetv/app/routes/app_routes.dart';
 import 'package:wetv/app/widgets/organisms/movie_vertical_card_list.dart';
 import 'package:wetv/app/widgets/organisms/movie_horizontal_card_list.dart';
@@ -24,42 +23,18 @@ class MovieListView extends GetView<MovieListController> {
 
   @override
   Widget build(BuildContext context) {
+    // [VN] Controller cho trang movie list
+    final movieListController = Get.put(MovieListController());
+
     return SingleChildScrollView(
       child: Column(
         children: [
-          MovieHeroSlider(
-            height: 420,
-            slides: const [
-              MovieHeroSlide(
-                title: 'Bách Hoa Sát',
-                foregroundUrl:
-                    'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-                backgroundUrl:
-                    'https://picsum.photos/seed/bg1/800/800',
-              ),
-              MovieHeroSlide(
-                title: 'Liễu Chu Ký',
-                foregroundUrl:
-                    'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-                backgroundUrl:
-                    'https://picsum.photos/seed/bg2/800/800',
-              ),
-              MovieHeroSlide(
-                title: 'Trực Ngọc',
-                foregroundUrl:
-                    'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-                backgroundUrl:
-                    'https://picsum.photos/seed/bg3/800/800',
-              ),
-              MovieHeroSlide(
-                title: 'Mạc Ly',
-                foregroundUrl:
-                    'https://vcover-vt-pic.wetvinfo.com/vcover_vt_pic/0/cuawe92xrqw8ll61730713408215_09TXvl25/350',
-                backgroundUrl:
-                    'https://picsum.photos/seed/bg4/800/800',
-              ),
-            ],
-            onSlideTap: (_, index) => _openMovieDetail(),
+          Obx(
+            () => MovieHeroSlider(
+              height: 420,
+              slides: movieListController.movieHeroSlides.toList(),
+              onSlideTap: (_, index) => _openMovieDetail(),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(left: 8),

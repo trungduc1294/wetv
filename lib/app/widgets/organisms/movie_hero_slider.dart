@@ -65,7 +65,9 @@ class _MovieHeroSliderState extends State<MovieHeroSlider> {
   Widget build(BuildContext context) {
     if (widget.slides.isEmpty) return const SizedBox.shrink();
 
-    final currentSlide = widget.slides[_currentIndex];
+    // [VN] Clamp index vì slides có thể đổi độ dài khi API trả về
+    final index = _currentIndex.clamp(0, widget.slides.length - 1);
+    final currentSlide = widget.slides[index];
 
     return SizedBox(
       height: widget.height,
@@ -80,7 +82,7 @@ class _MovieHeroSliderState extends State<MovieHeroSlider> {
             switchOutCurve: Curves.easeOut,
             child: Image.network(
               currentSlide.backgroundUrl,
-              key: ValueKey('bg_${currentSlide.backgroundUrl}_$_currentIndex'),
+              key: ValueKey('bg_${currentSlide.backgroundUrl}_$index'),
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
@@ -155,7 +157,7 @@ class _MovieHeroSliderState extends State<MovieHeroSlider> {
                   const SizedBox(width: 12),
                   _SliderDots(
                     count: widget.slides.length,
-                    currentIndex: _currentIndex,
+                    currentIndex: index,
                     dotSize: widget.dotSize,
                     activeDotSize: widget.activeDotSize,
                     spacing: widget.dotSpacing,
