@@ -66,6 +66,7 @@ flutter:
     - lib/app/data/dump/movie_hero_slide.json
     - lib/app/data/dump/movie_list.json
     - lib/app/data/dump/movie_list_detail_info.json
+    - lib/app/data/dump/ranking_movies.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

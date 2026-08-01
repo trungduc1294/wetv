@@ -5,6 +5,7 @@ import 'package:wetv/app/data/models/category_model.dart';
 import 'package:wetv/app/data/models/movie_detail_model.dart';
 import 'package:wetv/app/data/models/movie_hero_slide.dart';
 import 'package:wetv/app/data/models/movie_model.dart';
+import 'package:wetv/app/data/models/ranking_movie_model.dart';
 
 class CategoriesApi {
   Future<List<CategoryModel>> getCategories() async {
@@ -29,7 +30,9 @@ class CategoriesApi {
 
 class MovieListApi {
   // [VN] Lấy danh sách movie hero slide theo category
-  Future<List<MovieHeroSlide>> getMovieHeroSlides({required int categoryId}) async {
+  Future<List<MovieHeroSlide>> getMovieHeroSlides({
+    required int categoryId,
+  }) async {
     try {
       await Future.delayed(const Duration(milliseconds: 200));
 
@@ -87,6 +90,30 @@ class MovieListApi {
           .toList();
 
       return _rotateByCategory(details, categoryId);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // [VN] Lấy danh sách movie ranking
+  Future<List<RankingMovieModel>> getRankingMovies() async {
+    try {
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      final String response = await rootBundle.loadString(
+        'lib/app/data/dump/ranking_movies.json',
+      );
+      final List<dynamic> data = jsonDecode(response);
+      final movies = data
+          .map(
+            (json) => RankingMovieModel.fromJson(
+              json as Map<String, dynamic>,
+              data.indexOf(json),
+            ),
+          )
+          .toList();
+
+      return movies;
     } catch (e) {
       rethrow;
     }

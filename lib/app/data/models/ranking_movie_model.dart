@@ -15,4 +15,15 @@ class RankingMovieModel {
   final String year;
   final String genre;
   final String description;
+
+  factory RankingMovieModel.fromJson(Map<String, dynamic> json, int index) {
+    return RankingMovieModel(
+      id: '$index',
+      posterUrl: json['posterUrl'],
+      title: json['title'],
+      year: json['year'],
+      genre: json['genre'],
+      description: json['description'],
+    );
+  }
 }
