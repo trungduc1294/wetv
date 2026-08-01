@@ -24,101 +24,101 @@ class MovieListView extends GetView<MovieListController> {
 
   @override
   Widget build(BuildContext context) {
-    // [VN] Controller cho trang movie list
-    final movieListController = Get.put(MovieListController());
-
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Obx(
-            () => MovieHeroSlider(
-              height: heroSliderHeight,
-              slides: movieListController.movieHeroSlides.toList(),
-              onSlideTap: (_, index) => _openMovieDetail(),
+    return Obx(
+      () => SingleChildScrollView(
+        key: ValueKey(controller.selectedCategoryId.value),
+        child: Column(
+          children: [
+            Obx(
+              () => MovieHeroSlider(
+                height: heroSliderHeight,
+                slides: controller.movieHeroSlides.toList(),
+                onSlideTap: (_, index) => _openMovieDetail(),
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: CategoryHeading(
-              title: TrKeys.continueWatching.tr,
-              icon: Icons.arrow_forward_ios,
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: CategoryHeading(
+                title: TrKeys.continueWatching.tr,
+                icon: Icons.arrow_forward_ios,
+              ),
             ),
-          ),
 
-          // [VN] Danh sách movie vertical card list
-          Obx(
-            () => MovieVerticalCardList(
-              movies: movieListController.movieList.toList(),
-              onMovieTap: (_) => _openMovieDetail(),
+            // [VN] Danh sách movie vertical card list
+            Obx(
+              () => MovieVerticalCardList(
+                movies: controller.movieList.toList(),
+                onMovieTap: (_) => _openMovieDetail(),
+              ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 20),
 
-          // [VN] Danh sách movie horizontal card list
-          Obx(
-            () => MovieHorizontalCardList(
-              movies: movieListController.movieList.toList(),
-              onMovieTap: (_) => _openMovieDetail(),
+            // [VN] Danh sách movie horizontal card list
+            Obx(
+              () => MovieHorizontalCardList(
+                movies: controller.movieList.toList(),
+                onMovieTap: (_) => _openMovieDetail(),
+              ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 20),
 
-          Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: CategoryHeading(
-              title: TrKeys.ranking.tr,
-              icon: Icons.arrow_forward_ios,
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: CategoryHeading(
+                title: TrKeys.ranking.tr,
+                icon: Icons.arrow_forward_ios,
+              ),
             ),
-          ),
 
-          // [VN] Danh sách movie ranking list
-          Obx(
-            () => MovieRankingList(
-              movies: movieListController.movieList.toList(),
-              maxRankingItems: 10,
-              onMovieTap: (_) => _openMovieDetail(),
+            // [VN] Danh sách movie ranking list
+            Obx(
+              () => MovieRankingList(
+                movies: controller.movieList.toList(),
+                maxRankingItems: 10,
+                onMovieTap: (_) => _openMovieDetail(),
+              ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 20),
 
-          // [VN] Danh sách movie grid
-          Obx(
-            () => MovieGrid(
-              movies: movieListController.movieList.take(4).toList(),
-              showTitle: true,
-              spacing: 10,
-              spacingY: 16,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              onMovieTap: (_) => _openMovieDetail(),
+            // [VN] Danh sách movie grid
+            Obx(
+              () => MovieGrid(
+                movies: controller.movieList.take(4).toList(),
+                showTitle: true,
+                spacing: 10,
+                spacingY: 16,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                onMovieTap: (_) => _openMovieDetail(),
+              ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 20),
 
-          // [VN] Danh sách panel chi tiết phim xếp theo cột
-          Obx(
-            () => Column(
-              children: movieListController.movieListDetailInfo
-                  .map(
-                    (detail) => Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: MovieDetailHorizontalPanel(
-                        height: 320,
-                        detail: detail,
-                        onAddToPlaylist: () {},
-                        onSideSceneTap: (_) {},
-                        onMoreSideScenesTap: () {},
+            // [VN] Danh sách panel chi tiết phim xếp theo cột
+            Obx(
+              () => Column(
+                children: controller.movieListDetailInfo
+                    .map(
+                      (detail) => Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: MovieDetailHorizontalPanel(
+                          height: 320,
+                          detail: detail,
+                          onAddToPlaylist: () {},
+                          onSideSceneTap: (_) {},
+                          onMoreSideScenesTap: () {},
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

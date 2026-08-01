@@ -9,11 +9,9 @@ import 'package:wetv/app/modules/movie_list/movie_list_view.dart';
 import 'package:wetv/app/modules/shorts/shorts_view.dart';
 import 'package:wetv/app/widgets/organisms/home_header.dart';
 import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar.dart';
-import 'package:wetv/app/widgets/molecules/HorizonNavBar/horizon_nav_bar_controller.dart';
 
 class HomeView extends GetView<Homecontroller> {
   HomeView({super.key});
-  final horizonNavBarController = Get.put(Horizonnavbarcontroller());
 
   // [VN] Chiều cao phần header (search row + category navbar + vùng gradient) để chừa chỗ nội dung
   static const double _headerHeight = 132;
@@ -85,7 +83,7 @@ class HomeView extends GetView<Homecontroller> {
       },
       child: Stack(
         children: [
-          Positioned.fill(child: Obx(() => _buildCategoryContent())),
+          const Positioned.fill(child: MovieListView()),
           Positioned(top: 0, left: 0, right: 0, child: _buildFloatingHeader()),
         ],
       ),
@@ -130,13 +128,11 @@ class HomeView extends GetView<Homecontroller> {
 
   // [VN] Giai đoạn 1: 0 = trên hero, 1 = đã kéo tới nửa hero → orange đặc
   double _headerOrangeProgress() {
-    if (horizonNavBarController.selectedIndex.value != 0) return 1;
     return _progressToward(MovieListView.heroSliderHeight / 2);
   }
 
   // [VN] Giai đoạn 2: 0 = chưa hết hero, 1 = đã kéo hết hero → gray_900 đặc
   double _headerGrayProgress() {
-    if (horizonNavBarController.selectedIndex.value != 0) return 1;
     return _progressToward(MovieListView.heroSliderHeight - _headerHeight);
   }
 
@@ -164,40 +160,6 @@ class HomeView extends GetView<Homecontroller> {
         return Color.lerp(orange, AppColors.gray_900, grayProgress)!;
       }).toList(),
       stops: const [0, 0.45, 0.75, 1],
-    );
-  }
-
-  // [VN] Nội dung theo tab category ngang
-  Widget _buildCategoryContent() {
-    // [VN] Đổi tab -> scroll view mới bắt đầu từ 0, đồng bộ lại offset cho header
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => controller.updateScrollOffset(0),
-    );
-
-    switch (horizonNavBarController.selectedIndex.value) {
-      case 0:
-        return MovieListView();
-      case 1:
-        return _buildPlaceholder(TrKeys.filmStory.tr);
-      case 2:
-        return _buildPlaceholder(TrKeys.anime.tr);
-      case 3:
-        return _buildPlaceholder(TrKeys.costume.tr.toUpperCase());
-      default:
-        return const SizedBox.shrink();
-    }
-  }
-
-  // [VN] Tab chưa có nội dung: chừa chỗ cho header nổi phía trên
-  Widget _buildPlaceholder(String name) {
-    return Padding(
-      padding: const EdgeInsets.only(top: _headerHeight),
-      child: Center(
-        child: Text(
-          TrKeys.contentPagePrefix.trParams({'name': name}),
-          style: const TextStyle(color: AppColors.white_primary),
-        ),
-      ),
     );
   }
 }

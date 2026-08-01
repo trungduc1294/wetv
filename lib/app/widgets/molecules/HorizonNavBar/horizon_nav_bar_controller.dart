@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:wetv/app/apis/apis.dart';
 import 'package:wetv/app/data/models/category_model.dart';
+import 'package:wetv/app/modules/home/home_controller.dart';
+import 'package:wetv/app/modules/movie_list/movie_list_controller.dart';
 
 class Horizonnavbarcontroller extends GetxController {
   final CategoriesApi _categoriesApi = CategoriesApi();
@@ -27,8 +29,18 @@ class Horizonnavbarcontroller extends GetxController {
     }
   }
 
-  // [VN] Hàm thay đổi tab
+  // [VN] Đổi tab category -> gọi API load dữ liệu movie list
   void changeTab(int index) {
+    if (selectedIndex.value == index) return;
     selectedIndex.value = index;
+
+    if (categories.isEmpty || index >= categories.length) return;
+
+    final categoryId = categories[index].id;
+    Get.find<MovieListController>().loadByCategory(categoryId);
+
+    if (Get.isRegistered<Homecontroller>()) {
+      Get.find<Homecontroller>().updateScrollOffset(0);
+    }
   }
 }

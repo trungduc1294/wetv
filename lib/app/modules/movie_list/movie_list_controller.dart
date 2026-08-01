@@ -7,6 +7,7 @@ import 'package:wetv/app/data/models/movie_model.dart';
 class MovieListController extends GetxController {
   final MovieListApi _movieListApi = MovieListApi();
 
+  final selectedCategoryId = 1.obs;
   final movieHeroSlides = <MovieHeroSlide>[].obs;
   final movieList = <MovieModel>[].obs;
   final movieListDetailInfo = <MovieDetailInfo>[].obs;
@@ -14,37 +15,46 @@ class MovieListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getMovieHeroSlides();
-    getMovieList();
-    getMovieListDetailInfo();
+    loadByCategory(selectedCategoryId.value);
   }
 
-  // [VN] Lấy danh sách movie hero slide từ API
-  Future<void> getMovieHeroSlides() async {
+  // [VN] Gọi API lấy toàn bộ dữ liệu theo category
+  Future<void> loadByCategory(int categoryId) async {
+    selectedCategoryId.value = categoryId;
+
+    await Future.wait([
+      getMovieHeroSlides(categoryId),
+      getMovieList(categoryId),
+      getMovieListDetailInfo(categoryId),
+    ]);
+  }
+
+  Future<void> getMovieHeroSlides(int categoryId) async {
     try {
-      final result = await _movieListApi.getMovieHeroSlides();
+      final result = await _movieListApi.getMovieHeroSlides(
+        categoryId: categoryId,
+      );
       movieHeroSlides.assignAll(result);
     } catch (e) {
       print(e);
     }
   }
 
-  // [VN] Lấy danh sách movie list từ API
-  Future<void> getMovieList() async {
+  Future<void> getMovieList(int categoryId) async {
     try {
-      final result = await _movieListApi.getMovieList();
+      final result = await _movieListApi.getMovieList(categoryId: categoryId);
       movieList.assignAll(result);
     } catch (e) {
       print(e);
     }
   }
 
-  // [VN] Lấy thông tin danh sách film chi tiết từ API
-  Future<void> getMovieListDetailInfo() async {
+  Future<void> getMovieListDetailInfo(int categoryId) async {
     try {
-      final result = await _movieListApi.getMovieListDetailInfo();
+      final result = await _movieListApi.getMovieListDetailInfo(
+        categoryId: categoryId,
+      );
       movieListDetailInfo.assignAll(result);
-      print(movieListDetailInfo);
     } catch (e) {
       print(e);
     }

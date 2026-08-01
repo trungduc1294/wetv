@@ -28,37 +28,35 @@ class CategoriesApi {
 }
 
 class MovieListApi {
-  // [VN] Lấy danh sách movie hero slide từ API
-  Future<List<MovieHeroSlide>> getMovieHeroSlides() async {
+  // [VN] Lấy danh sách movie hero slide theo category
+  Future<List<MovieHeroSlide>> getMovieHeroSlides({required int categoryId}) async {
     try {
-      // [VN] Delay để mô phỏng API
       await Future.delayed(const Duration(milliseconds: 200));
 
-      // [VN] Đọc danh sách movie hero slide từ file dump JSON
       final String response = await rootBundle.loadString(
         'lib/app/data/dump/movie_hero_slide.json',
       );
       final List<dynamic> data = jsonDecode(response);
-      return data
+      final slides = data
           .map((json) => MovieHeroSlide.fromJson(json as Map<String, dynamic>))
           .toList();
+
+      return _rotateByCategory(slides, categoryId);
     } catch (e) {
       rethrow;
     }
   }
 
-  // [VN] Lấy danh sách movie list từ API
-  Future<List<MovieModel>> getMovieList() async {
+  // [VN] Lấy danh sách movie list theo category
+  Future<List<MovieModel>> getMovieList({required int categoryId}) async {
     try {
-      // [VN] Delay để mô phỏng API
       await Future.delayed(const Duration(milliseconds: 200));
 
-      // [VN] Đọc danh sách movie list từ file dump JSON
       final String response = await rootBundle.loadString(
         'lib/app/data/dump/movie_list.json',
       );
       final List<dynamic> data = jsonDecode(response);
-      return data
+      final movies = data
           .map(
             (json) => MovieModel.fromJson(
               json as Map<String, dynamic>,
@@ -66,27 +64,38 @@ class MovieListApi {
             ),
           )
           .toList();
+
+      return _rotateByCategory(movies, categoryId);
     } catch (e) {
       rethrow;
     }
   }
 
-  // [VN] Lấy thông tin danh sách film chi tiết
-  Future<List<MovieDetailInfo>> getMovieListDetailInfo() async {
+  // [VN] Lấy thông tin danh sách film chi tiết theo category
+  Future<List<MovieDetailInfo>> getMovieListDetailInfo({
+    required int categoryId,
+  }) async {
     try {
-      // [VN] Delay để mô phỏng API
       await Future.delayed(const Duration(milliseconds: 200));
 
-      // [VN] Đọc thông tin danh sách film chi tiết từ file dump JSON
       final String response = await rootBundle.loadString(
         'lib/app/data/dump/movie_list_detail_info.json',
       );
       final List<dynamic> data = jsonDecode(response);
-      return data
+      final details = data
           .map((json) => MovieDetailInfo.fromJson(json as Map<String, dynamic>))
           .toList();
+
+      return _rotateByCategory(details, categoryId);
     } catch (e) {
       rethrow;
     }
+  }
+
+  // [VN] Xoay vòng dữ liệu mock theo categoryId để mô phỏng API khác nhau mỗi tab
+  List<T> _rotateByCategory<T>(List<T> items, int categoryId) {
+    if (items.isEmpty) return items;
+    final offset = (categoryId - 1) % items.length;
+    return [...items.sublist(offset), ...items.sublist(0, offset)];
   }
 }

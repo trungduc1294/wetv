@@ -9,7 +9,7 @@ class HorizonNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final horizonNavBarController = Get.put(Horizonnavbarcontroller());
+    final horizonNavBarController = Get.find<Horizonnavbarcontroller>();
     return SizedBox(
       height: 45,
       child: Obx(() {
