@@ -18,7 +18,7 @@ class HomeView extends GetView<Homecontroller> {
   // [VN] Chiều cao phần header (search row + category navbar + vùng gradient) để chừa chỗ nội dung
   static const double _headerHeight = 132;
 
-  // [VN] Khoảng scroll để header chuyển dần sang nền primary đặc
+  // [VN] Khoảng scroll để header chuyển dần giữa các giai đoạn màu
   static const double _headerFadeDistance = 80;
 
   @override
@@ -92,7 +92,7 @@ class HomeView extends GetView<Homecontroller> {
     );
   }
 
-  // [VN] Header mờ trên hero slide, chuyển sang nền primary khi scroll qua hero
+  // [VN] Header: nửa hero → orange đặc, hết hero → gray_900 đặc
   Widget _buildFloatingHeader() {
     // [VN] Dựng sẵn nội dung ngoài Obx để không rebuild lại khi scroll
     final Widget headerContent = SafeArea(
@@ -111,26 +111,40 @@ class HomeView extends GetView<Homecontroller> {
     return Obx(
       () => DecoratedBox(
         decoration: BoxDecoration(
-          gradient: _headerGradient(_headerSolidProgress()),
+          gradient: _headerGradient(
+            orangeProgress: _headerOrangeProgress(),
+            grayProgress: _headerGrayProgress(),
+          ),
         ),
         child: headerContent,
       ),
     );
   }
 
-  // [VN] 0 = đang nằm trên hero slide, 1 = đã scroll qua hero
-  double _headerSolidProgress() {
-    // [VN] Các tab category khác không có hero slide nên dùng nền đặc luôn
-    if (horizonNavBarController.selectedIndex.value != 0) return 1;
-
-    final double fadeStart =
-        MovieListView.heroSliderHeight - _headerHeight - _headerFadeDistance;
-    final double scrolled = controller.scrollOffset.value - fadeStart;
+  // [VN] Progress 0→1 trong khoảng [_fadeDistance] trước mốc [solidAt]
+  double _progressToward(double solidAt) {
+    final scrolled =
+        controller.scrollOffset.value - (solidAt - _headerFadeDistance);
     return (scrolled / _headerFadeDistance).clamp(0.0, 1.0);
   }
 
-  // [VN] Gradient chuyển dần về primary đặc theo progress
-  LinearGradient _headerGradient(double progress) {
+  // [VN] Giai đoạn 1: 0 = trên hero, 1 = đã kéo tới nửa hero → orange đặc
+  double _headerOrangeProgress() {
+    if (horizonNavBarController.selectedIndex.value != 0) return 1;
+    return _progressToward(MovieListView.heroSliderHeight / 2);
+  }
+
+  // [VN] Giai đoạn 2: 0 = chưa hết hero, 1 = đã kéo hết hero → gray_900 đặc
+  double _headerGrayProgress() {
+    if (horizonNavBarController.selectedIndex.value != 0) return 1;
+    return _progressToward(MovieListView.heroSliderHeight - _headerHeight);
+  }
+
+  // [VN] Gradient: hero mờ → orange_primary → gray_900
+  LinearGradient _headerGradient({
+    required double orangeProgress,
+    required double grayProgress,
+  }) {
     final List<Color> heroColors = [
       AppColors.orange_primary.withValues(alpha: 0.75),
       AppColors.orange_primary.withValues(alpha: 0.55),
@@ -141,9 +155,14 @@ class HomeView extends GetView<Homecontroller> {
     return LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: heroColors
-          .map((color) => Color.lerp(color, AppColors.gray_900, progress)!)
-          .toList(),
+      colors: heroColors.map((color) {
+        final orange = Color.lerp(
+          color,
+          AppColors.orange_primary.withValues(alpha: 0.65),
+          orangeProgress,
+        )!;
+        return Color.lerp(orange, AppColors.gray_900, grayProgress)!;
+      }).toList(),
       stops: const [0, 0.45, 0.75, 1],
     );
   }

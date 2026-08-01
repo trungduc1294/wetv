@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wetv/app/core/theme/app_color.dart';
 import 'package:wetv/app/data/models/movie_hero_slide.dart';
@@ -20,6 +22,7 @@ class MovieHeroSlider extends StatefulWidget {
     this.activeDotSize = 7,
     this.dotSpacing = 6,
     this.contentPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
+    this.autoPlayInterval = const Duration(seconds: 4),
     this.onSlideTap,
   });
 
@@ -35,6 +38,8 @@ class MovieHeroSlider extends StatefulWidget {
   final double activeDotSize;
   final double dotSpacing;
   final EdgeInsetsGeometry contentPadding;
+  // [VN] Thời gian giữa mỗi lần tự chuyển slide; null = tắt auto play
+  final Duration? autoPlayInterval;
   final void Function(MovieHeroSlide slide, int index)? onSlideTap;
 
   @override
@@ -44,21 +49,67 @@ class MovieHeroSlider extends StatefulWidget {
 class _MovieHeroSliderState extends State<MovieHeroSlider> {
   late final PageController _pageController;
   int _currentIndex = 0;
+  Timer? _autoPlayTimer;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _scheduleAutoPlay();
+  }
+
+  @override
+  void didUpdateWidget(MovieHeroSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.slides.length != widget.slides.length ||
+        oldWidget.autoPlayInterval != widget.autoPlayInterval) {
+      _scheduleAutoPlay();
+    }
   }
 
   @override
   void dispose() {
+    _autoPlayTimer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
 
+  // [VN] Bắt đầu timer auto play sau frame đầu (PageController cần có clients)
+  void _scheduleAutoPlay() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _startAutoPlay());
+  }
+
+  void _startAutoPlay() {
+    _autoPlayTimer?.cancel();
+    final interval = widget.autoPlayInterval;
+    if (interval == null || widget.slides.length <= 1) return;
+
+    _autoPlayTimer = Timer.periodic(interval, (_) => _goToNextSlide());
+  }
+
+  void _goToNextSlide() {
+    if (!mounted || !_pageController.hasClients || widget.slides.isEmpty) return;
+
+    final nextIndex = (_currentIndex + 1) % widget.slides.length;
+    _pageController.animateToPage(
+      nextIndex,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+
   void _onPageChanged(int index) {
     setState(() => _currentIndex = index);
+    _startAutoPlay();
+  }
+
+  void _goToSlide(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+    _startAutoPlay();
   }
 
   @override
@@ -161,13 +212,7 @@ class _MovieHeroSliderState extends State<MovieHeroSlider> {
                     dotSize: widget.dotSize,
                     activeDotSize: widget.activeDotSize,
                     spacing: widget.dotSpacing,
-                    onDotTap: (index) {
-                      _pageController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeOut,
-                      );
-                    },
+                    onDotTap: _goToSlide,
                   ),
                 ],
               ),
